@@ -32,9 +32,7 @@ find_package(Threads REQUIRED)
 find_package(Boost REQUIRED COMPONENTS filesystem system signals)
 find_package(cppunit)
 
-if(CPPUNIT_FOUND)
-	include(CTest)
-endif()
+include(CTest)
 
 ###
 # Configuration
