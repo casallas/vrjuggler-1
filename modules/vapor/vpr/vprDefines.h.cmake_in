@@ -1,0 +1,332 @@
+/* vpr/vprDefines.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define if the GLIBC backtrace() function is available. */
+#cmakedefine HAVE_BACKTRACE
+
+/* Define to 1 if you have the <bstring.h> header file. */
+#cmakedefine HAVE_BSTRING_H
+
+/* Define if TCP_CORK or TCP_NOPUSH is defined in netint/tcp.h */
+#cmakedefine HAVE_CORKABLE_TCP
+
+/* Define to 1 if you have the <ext/hash_map> header file. */
+#cmakedefine HAVE_EXT_HASH_MAP
+
+/* Define to 1 if you have the <ext/hash_set> header file. */
+#cmakedefine HAVE_EXT_HASH_SET
+
+/* Define to 1 if you have the <ext/numeric> header file. */
+#cmakedefine HAVE_EXT_NUMERIC
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#cmakedefine HAVE_FCNTL_H
+
+/* Define to 1 if you have the `getifaddrs' function. */
+#cmakedefine HAVE_GETIFADDRS
+
+/* Define to 1 if you have the `gettimeofday' function. */
+#cmakedefine HAVE_GETTIMEOFDAY
+
+/* Define to 1 if you have the <hash_map> header file. */
+#cmakedefine HAVE_HASH_MAP
+
+/* Define to 1 if you have the <hash_map.h> header file. */
+#cmakedefine HAVE_HASH_MAP_H
+
+/* Define to 1 if you have the <hash_set> header file. */
+#cmakedefine HAVE_HASH_SET
+
+/* Define to 1 if you have the <hash_set.h> header file. */
+#cmakedefine HAVE_HASH_SET_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#cmakedefine HAVE_INTTYPES_H
+
+/* Define to 1 if you have the <limits.h> header file. */
+#cmakedefine HAVE_LIMITS_H
+
+/* Define to 1 if you have the <memory.h> header file. */
+#cmakedefine HAVE_MEMORY_H
+
+/* define if the C++ compiler supports namespaces */
+#cmakedefine HAVE_NAMESPACE
+
+/* Define to 1 if you have the <nspr.h> header file. */
+#cmakedefine HAVE_NSPR_H
+
+/* Define to 1 if you have the <nspr/nspr.h> header file. */
+#cmakedefine HAVE_NSPR_NSPR_H
+
+/* define if the C++ compiler supports RTTI */
+#cmakedefine HAVE_RTTI
+
+/* Define to 1 if you have the sched_yield(2) function. */
+#cmakedefine HAVE_SCHED_YIELD
+
+/* Define to 1 if you have the `sigaction' function. */
+#cmakedefine HAVE_SIGACTION
+
+/* Define to 1 if you have the `sigaddset' function. */
+#cmakedefine HAVE_SIGADDSET
+
+/* Define to 1 if you have the `sigdelset' function. */
+#cmakedefine HAVE_SIGDELSET
+
+/* Define to 1 if you have the `sigemptyset' function. */
+#cmakedefine HAVE_SIGEMPTYSET
+
+/* Define to 1 if you have the `sigfillset' function. */
+#cmakedefine HAVE_SIGFILLSET
+
+/* Define to 1 if you have the `sigismember' function. */
+#cmakedefine HAVE_SIGISMEMBER
+
+/* Define to 1 if you have the <signal.h> header file. */
+#cmakedefine HAVE_SIGNAL_H
+
+/* Define if struct sockaddr_in has sin_len */
+#cmakedefine HAVE_SIN_LEN
+
+/* Define to 1 if you have the `snprintf' function. */
+#cmakedefine HAVE_SNPRINTF
+
+/* define if the C++ compiler supports static_cast<> */
+#cmakedefine HAVE_STATIC_CAST
+
+/* define if the C++ compiler supports the standard library */
+#cmakedefine HAVE_STD
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#cmakedefine HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#cmakedefine HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strerror' function. */
+#cmakedefine HAVE_STRERROR
+
+/* Define to 1 if you have the `strerror_r' function. */
+#cmakedefine HAVE_STRERROR_R
+
+/* Define to 1 if you have the <strings.h> header file. */
+#cmakedefine HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#cmakedefine HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/capability.h> header file. */
+#cmakedefine HAVE_SYS_CAPABILITY_H
+
+/* Define to 1 if you have the <sys/file.h> header file. */
+#cmakedefine HAVE_SYS_FILE_H
+
+/* Define to 1 if you have the <sys/filio.h> header file. */
+#cmakedefine HAVE_SYS_FILIO_H
+
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#cmakedefine HAVE_SYS_IOCTL_H
+
+/* Define to 1 if you have the <sys/socket.h> header file. */
+#cmakedefine HAVE_SYS_SOCKET_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#cmakedefine HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/stdsyms.h> header file. */
+#cmakedefine HAVE_SYS_STDSYMS_H
+
+/* Define to 1 if you have the <sys/sysinfo.h> header file. */
+#cmakedefine HAVE_SYS_SYSINFO_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#cmakedefine HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#cmakedefine HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <sys/uuid.h> header file. */
+#cmakedefine HAVE_SYS_UUID_H
+
+/* define if the C++ compiler supports basic templates */
+#cmakedefine HAVE_TEMPLATES
+
+/* Define to 1 if you have the <termios.h> header file. */
+#cmakedefine HAVE_TERMIOS_H
+
+/* Define if the timeval type is available. */
+#cmakedefine HAVE_TIMEVAL
+
+/* Define if the timezone type is available. */
+#cmakedefine HAVE_TIMEZONE
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#cmakedefine HAVE_UNISTD_H
+
+/* Define to 1 if you have the <uuid.h> header file. */
+#cmakedefine HAVE_UUID_H
+
+/* Define to 1 if you have the <uuid/uuid.h> header file. */
+#cmakedefine HAVE_UUID_UUID_H
+
+/* define to \"IRIX5\" or \"IRIX6\" depending on IRIX version */
+#cmakedefine IRIXREL
+
+/* Define to the address where bug reports for this package should be sent. */
+#cmakedefine PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#cmakedefine PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#cmakedefine PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#cmakedefine PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#cmakedefine PACKAGE_URL
+
+/* Define to the version of this package. */
+#cmakedefine PACKAGE_VERSION
+
+/* Define as the return type of signal handlers (`int' or `void'). */
+#cmakedefine RETSIGTYPE
+
+/* Define if using POSIX threads. */
+#cmakedefine RWSTD_MULTI_THREAD
+
+/* Define if using POSIX threads. */
+#cmakedefine RW_MULTI_THREAD
+
+/* The size of `char', as computed by sizeof. */
+/* The size of `int', as computed by sizeof. */
+/* The size of `long', as computed by sizeof. */
+/* The size of `long long', as computed by sizeof. */
+/* The size of `short', as computed by sizeof. */
+@VPR_SIZEOF_MACROS@
+
+/* Define to 1 if you have the ANSI C header files. */
+#cmakedefine STDC_HEADERS
+
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+#cmakedefine TIME_WITH_SYS_TIME
+
+/* Define if unnamed POSIX semaphores are available. */
+#cmakedefine VPR_HAVE_UNNAMED_POSIX_SEMAPHORE
+
+/* Define to the major version number of your HP-UX installation. */
+#cmakedefine VPR_HPUX_VERSION
+
+/* Define if building on AIX. */
+#cmakedefine VPR_OS_AIX
+
+/* Define if building on Digital UNIX. */
+#cmakedefine VPR_OS_DUX
+
+/* Define if building on Darwin. */
+#cmakedefine VPR_OS_Darwin
+
+/* Define if building on DragonFly. */
+#cmakedefine VPR_OS_DragonFly
+
+/* Define if building on FreeBSD. */
+#cmakedefine VPR_OS_FreeBSD
+
+/* Define if the target OS does not match anything else. */
+#cmakedefine VPR_OS_GENERIC
+
+/* Define if building on HP-UX. */
+#cmakedefine VPR_OS_HPUX
+
+/* Define if building on IRIX. */
+#cmakedefine VPR_OS_IRIX
+
+/* Define if building on Linux. */
+#cmakedefine VPR_OS_Linux
+
+/* Define to match the output of running 'uname -r'. */
+#cmakedefine VPR_OS_RELEASE
+
+/* Define to match the numeric major version number of the target OS. */
+#cmakedefine VPR_OS_RELEASE_MAJOR
+
+/* Define to match the numeric minor version number of the target OS. */
+#cmakedefine VPR_OS_RELEASE_MINOR
+
+/* Define if building on Solaris/SunOS. */
+#cmakedefine VPR_OS_Solaris
+
+/* Define if building on a Win32 platform. */
+#cmakedefine VPR_OS_Win32
+
+/* Define if using POSIX threads. */
+#cmakedefine VPR_POSIX_C_SOURCE
+
+/* Define if using POSIX semaphores. */
+#cmakedefine VPR_POSIX_SEMAPHORES
+
+/* Define if VPR simulated sockets will be used. */
+#cmakedefine VPR_SIMULATOR
+
+/* Define to be the POSIX threads constant for thread scoping. */
+#cmakedefine VPR_THREAD_SCOPE
+
+/* Define to 1 if you have the DCE 1.1 UUID functions (uuid_create(3), etc.).
+   */
+#cmakedefine VPR_USE_DCE_1_1_UUID
+
+/* Define to 1 if neither uuid_create(3) nor uuid_generate(3) are available.
+   */
+#cmakedefine VPR_USE_LEACH_UUID
+
+/* Define to 1 if you have the e2fsprogs libuuid funcs (uuid_generate(3),
+   etc.). */
+#cmakedefine VPR_USE_LIBUUID
+
+/* Define if using the Netscape Portable Runtime. */
+#cmakedefine VPR_USE_NSPR
+
+/* Define if using POSIX threads. */
+#cmakedefine VPR_USE_PTHREADS
+
+/* define if compiling on a Win32 platform */
+#cmakedefine WIN32
+
+/* Define if building on Darwin or IRIX. */
+#cmakedefine _BSD_TYPES
+
+/* Define if building on HP-UX. */
+#cmakedefine _CMA_NOWRAPPERS_
+
+/* Define if compiling on Linux with GCC older than 3.0. */
+#cmakedefine _GNU_SOURCE
+
+/* Define if building on HP-UX. */
+#cmakedefine _INCLUDE_TERMIO
+
+/* define if compiling on a Win32 platform */
+#cmakedefine _MBCS
+
+/* define if using POSIX threads Draft 10 */
+#cmakedefine _PTHREADS_DRAFT_10
+
+/* define if using POSIX threads Draft 4 */
+#cmakedefine _PTHREADS_DRAFT_4
+
+/* Define if using POSIX threads. */
+#cmakedefine _REENTRANT
+
+/* Define if using POSIX threads. */
+#cmakedefine _THREAD_SAFE
+
+/* Define to int if the in_addr_t type is not available. */
+#cmakedefine in_addr_t
+
+/* Define to unsigned int if the sigset_t type is not available. */
+#cmakedefine sigset_t
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#cmakedefine size_t
+
+/* define to 'int' if your system does not have socklen_t */
+#cmakedefine socklen_t
