@@ -216,6 +216,18 @@
 /* Define if building on a Win32 platform. */
 #cmakedefine VPR_OS_Windows
 
+#ifdef VPR_OS_Windows
+/* Define to unsigned int if the sigset_t type is not available. */
+#define sigset_t unsigned int
+#endif
+
+#ifdef WIN32
+#  define VPR_OS_Win32
+/* Define if building on the Win64 platform. */
+#elif defined(WIN64)
+#  define VPR_OS_Win64
+#endif
+
 /* Define if using POSIX threads. */
 #cmakedefine VPR_POSIX_C_SOURCE
 
