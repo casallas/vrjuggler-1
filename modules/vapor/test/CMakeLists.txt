@@ -1,5 +1,5 @@
-#add_subdirectory(SerialPort)
-#add_subdirectory(Socket)
+add_subdirectory(SerialPort)
+add_subdirectory(Socket)
 add_subdirectory(Sync)
 #add_subdirectory(TestSuite)
 add_subdirectory(Thread)
