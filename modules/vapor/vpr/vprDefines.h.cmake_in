@@ -147,24 +147,6 @@
 /* define to \"IRIX5\" or \"IRIX6\" depending on IRIX version */
 #cmakedefine IRIXREL
 
-/* Define to the address where bug reports for this package should be sent. */
-#cmakedefine PACKAGE_BUGREPORT
-
-/* Define to the full name of this package. */
-#define PACKAGE_NAME "@CMAKE_PROJECT_NAME@"
-
-/* Define to the full name and version of this package. */
-#cmakedefine PACKAGE_STRING
-
-/* Define to the one symbol short name of this package. */
-#cmakedefine PACKAGE_TARNAME
-
-/* Define to the home page for this package. */
-#cmakedefine PACKAGE_URL
-
-/* Define to the version of this package. */
-#cmakedefine PACKAGE_VERSION
-
 /* Define as the return type of signal handlers (`int' or `void'). */
 #define RETSIGTYPE @RETSIGTYPE@
 
@@ -267,8 +249,8 @@
 /* Define if using POSIX threads. */
 #cmakedefine VPR_USE_PTHREADS
 
-/* define if compiling on a Win32 platform */
-#cmakedefine WIN32
+/* Define if using Windows threads. */
+#cmakedefine VPR_USE_WINTHREADS
 
 /* Define if building on Darwin or IRIX. */
 #cmakedefine _BSD_TYPES
