@@ -43,8 +43,8 @@ option(VPR_SIMULATOR "Use simulated interface." OFF)
 
 # OS define
 if(WIN32)
-	set(VPR_OS_Win32 1)
-	set(VPR_OS VPR_OS_Win32)
+	set(VPR_OS_Windows 1)
+	set(VPR_OS VPR_OS_Windows)
 else()
 	set(VPR_OS_${CMAKE_SYSTEM_NAME} 1)
 	set(VPR_OS VPR_OS_${CMAKE_SYSTEM_NAME})

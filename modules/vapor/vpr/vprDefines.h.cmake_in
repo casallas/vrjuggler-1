@@ -232,7 +232,7 @@
 #cmakedefine VPR_OS_Solaris
 
 /* Define if building on a Win32 platform. */
-#cmakedefine VPR_OS_Win32
+#cmakedefine VPR_OS_Windows
 
 /* Define if using POSIX threads. */
 #cmakedefine VPR_POSIX_C_SOURCE
@@ -242,6 +242,9 @@
 
 /* Define if VPR simulated sockets will be used. */
 #cmakedefine VPR_SIMULATOR
+
+/* Define if Boost socket code will be used. */
+#cmakedefine VPR_USE_BOOST
 
 /* Define to be the POSIX threads constant for thread scoping. */
 #define VPR_THREAD_SCOPE @VPR_THREAD_SCOPE@
