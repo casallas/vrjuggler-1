@@ -54,6 +54,7 @@ message(STATUS "VPR: Platform ${VPR_OS}")
 # System domain
 if(WIN32)
 	set(VPR_DOMAIN VPR_DOMAIN_WIN32)
+	set(VPR_USE_POSIX OFF) # Not actually used in the header, but used in this build
 else()
 	option(VPR_USE_NSPR "Use NSPR system instead of POSIX." OFF)
 	if(VPR_USE_NSPR)
