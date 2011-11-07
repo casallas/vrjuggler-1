@@ -151,7 +151,7 @@
 #cmakedefine PACKAGE_BUGREPORT
 
 /* Define to the full name of this package. */
-#cmakedefine PACKAGE_NAME
+#define PACKAGE_NAME "@CMAKE_PROJECT_NAME@"
 
 /* Define to the full name and version of this package. */
 #cmakedefine PACKAGE_STRING
@@ -244,7 +244,7 @@
 #cmakedefine VPR_SIMULATOR
 
 /* Define to be the POSIX threads constant for thread scoping. */
-#cmakedefine VPR_THREAD_SCOPE
+#define VPR_THREAD_SCOPE @VPR_THREAD_SCOPE@
 
 /* Define to 1 if you have the DCE 1.1 UUID functions (uuid_create(3), etc.).
    */

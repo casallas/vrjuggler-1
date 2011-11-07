@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.6.2)
 project(VPR)
 
+###
+# Version
+###
 set(CPACK_PACKAGE_VENDOR "Iowa State University")
 set(CPACK_PACKAGE_CONTACT "Ryan Pavlik <rpavlik@iastate.edu>")
 set(CPACK_PACKAGE_VERSION_MAJOR "2")
@@ -12,14 +15,32 @@ set(CPACK_PACKAGE_VERSION
 set(MAJOR_VER_NUMBER ${CPACK_PACKAGE_VERSION_MAJOR})
 set(MINOR_VER_NUMBER ${CPACK_PACKAGE_VERSION_MINOR})
 set(PATCH_VER_NUMBER ${CPACK_PACKAGE_VERSION_PATCH})
-find_package(Boost REQUIRED COMPONENTS filesystem system signals)
 
 math(EXPR VER_NUMBER "${MAJOR_VER_NUMBER} * 1000000 + ${MINOR_VER_NUMBER} * 1000 + ${PATCH_VER_NUMBER}")
 set(VER_STRING "\"${CPACK_PACKAGE_VERSION}\"")
 
+
+# CMake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+###
+# Dependencies
+###
+
+find_package(CPPDOM REQUIRED)
+find_package(Threads REQUIRED)
+find_package(Boost REQUIRED COMPONENTS filesystem system signals)
+find_package(cppunit)
+
+if(CPPUNIT_FOUND)
+	include(CTest)
+endif()
+
+###
+# Configuration
+###
 option(VPR_SIMULATOR "Use simulated interface." OFF)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # OS define
 if(WIN32)
 	set(VPR_OS_Win32 1)
@@ -38,7 +59,7 @@ else()
 	if(VPR_USE_NSPR)
 		set(VPR_DOMAIN VPR_DOMAIN_NSPR)
 		set(VPR_POSIX_SEMAPHORES 1)
-		set(VPR_USE_POSIX OFF) # Not actually used in the header
+		set(VPR_USE_POSIX OFF) # Not actually used in the header, but used in this build
 	else()
 		set(VPR_DOMAIN VPR_DOMAIN_POSIX)
 		set(VPR_USE_POSIX ON) # Not actually used in the header
@@ -55,13 +76,15 @@ option(VPR_USE_BOOST "Use Boost IO " ${BOOST_DEFAULT})
 message(STATUS "VPR: Using ${VPR_DOMAIN} system - Boost IO: ${VPR_USE_BOOST}.")
 
 # Threading
-find_package(Threads REQUIRED)
 if(CMAKE_USE_PTHREADS_INIT)
 	message(STATUS "VPR: Using pthreads.")
 	set(VPR_THREAD_SCOPE PTHREAD_SCOPE_SYSTEM)
 	set(VPR_POSIX_C_SOURCE 1)
 	set(VPR_USE_PTHREADS 1)
 	set(VPR_POSIX_SEMAPHORES 1)
+
+	# Until proven otherwise
+	set(VPR_HAVE_UNNAMED_POSIX_SEMAPHORE 1)
 elseif(CMAKE_USE_WIN32_THREADS_INIT)
 	message(STATUS "VPR: Using Win32 threads.")
 	set(VPR_USE_WINTHREADS 1)
@@ -175,11 +198,45 @@ else()
 	message(FATAL_ERROR "No alternate MD5 code currently available - must enable VPR_USE_EMBEDDED_MD5C")
 endif()
 
-# CPPDOM
-find_package(CPPDOM REQUIRED)
+# Networking
+if(NOT VPR_USE_NSPR)
+#	check_type_size(in_addr_t HAVE_IN_ADDR_T)
+#	if(NOT HAVE_IN_ADDR_T)
+#		message(FATAL_ERROR "Haven't yet handled if there's no in_addr_t")
+#	endif()
+	check_include_file_cxx(netinet/in.h HAVE_NETINET_IN_H)
+	check_include_file_cxx(netinet/in.h HAVE_NETINET_TCP_H)
+	if(HAVE_SYS_TYPES_H AND HAVE_NETINET_IN_H)
+		check_struct_has_member(sockaddr_in sin_len "sys/types.h;netinet/in.h" HAVE_SIN_LEN)
+	endif()
+	if(HAVE_SYS_TYPES_H AND HAVE_NETINET_TCP_H)
+		check_symbol_exists(TCP_CORK "sys/types.h;netinet/tcp.h" HAVE_TCP_CORK)
+		check_symbol_exists(TCP_NOPUSH "sys/types.h;netinet/tcp.h" HAVE_TCP_NOPUSH)
+		if(NOT CMAKE_SYSTEM_NAME MATCHES "Darwin")
+			# According to configure.ac, Darwin has a buggy nopush implementation
+			if(HAVE_TCP_CORK OR HAVE_TCP_NOPUSH)
+				set(HAVE_CORKABLE_TCP 1)
+			endif()
+		endif()
+	endif()
+endif()
+
+# Dynamic libraries
+if(NOT WIN32)
+	find_library(LIBDL_LIBRARY dl)
+	if(LIBDL_LIBRARY)
+		set(DL_LIBRARY ${LIBDL_LIBRARY})
+	else()
+		set(DL_LIBRARY)
+	endif()
+endif()
 
 set(VPR_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CPPDOM_INCLUDE_DIRS})
 
 include_directories(${VPR_INCLUDE_DIRECTORIES})
 
 add_subdirectory(vpr)
+
+if(BUILD_TESTING)
+	add_subdirectory(test)
+endif()
