@@ -34,6 +34,8 @@ find_package(cppunit)
 
 include(CTest)
 
+set(VPR_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CPPDOM_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+
 ###
 # Configuration
 ###
@@ -229,7 +231,6 @@ if(NOT WIN32)
 	endif()
 endif()
 
-set(VPR_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CPPDOM_INCLUDE_DIRS})
 
 include_directories(${VPR_INCLUDE_DIRECTORIES})
 
