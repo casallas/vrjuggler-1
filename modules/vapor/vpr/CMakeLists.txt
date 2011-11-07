@@ -323,6 +323,13 @@ set(SOURCES_MD5C
 	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/md5-c/md5c.c)
 source_group(MD5C FILES ${SOURCES_MD5C})
 
+set(SOURCES_LEACHUUID
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/leach-uuid/uuid/sysdep.c
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/leach-uuid/uuid/sysdep.h
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/leach-uuid/uuid/uuid.c
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/leach-uuid/uuid/uuid.h)
+source_group(LeachUUID FILES ${SOURCES_LEACHUUID})
+
 if(VPR_SIMULATOR)
 	list(APPEND SOURCES ${SOURCES_SIM})
 endif()
@@ -341,6 +348,10 @@ endif()
 
 if(VPR_USE_POSIX)
 	list(APPEND SOURCES ${SOURCES_POSIX})
+endif()
+
+if(VPR_USE_LEACH_UUID)
+	list(APPEND SOURCES ${SOURCES_LEACHUUID})
 endif()
 
 if(VPR_USE_EMBEDDED_MD5C)
