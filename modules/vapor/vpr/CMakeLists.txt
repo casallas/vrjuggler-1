@@ -315,8 +315,13 @@ set(SOURCES_DYNLOAD
 	DynLoad/LibraryLoader.cpp
 )
 source_group(DynLoad FILES ${SOURCES_DYNLOAD})
-
 list(APPEND SOURCES ${SOURCES_DYNLOAD})
+
+set(SOURCES_MD5C
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/md5-c/md5.h
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/md5-c/global.h
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/md5-c/md5c.c)
+source_group(MD5C FILES ${SOURCES_MD5C})
 
 if(VPR_SIMULATOR)
 	list(APPEND SOURCES ${SOURCES_SIM})
@@ -325,14 +330,21 @@ endif()
 if(WIN32)
 	list(APPEND SOURCES ${SOURCES_WIN32})
 endif()
+
 if(VPR_USE_BOOST)
 	list(APPEND SOURCES ${SOURCES_BOOST})
 endif()
+
 if(VPR_USE_NSPR)
 	list(APPEND SOURCES ${SOURCES_NSPR})
 endif()
+
 if(VPR_USE_POSIX)
 	list(APPEND SOURCES ${SOURCES_POSIX})
+endif()
+
+if(VPR_USE_EMBEDDED_MD5C)
+	list(APPEND SOURCES ${SOURCES_MD5C})
 endif()
 
 
@@ -343,5 +355,7 @@ add_library(vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR} SH
 target_link_libraries(vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR}
 	${UUID_LIBRARY}
 	${CPPDOM_LIBRARIES}
-	${CMAKE_THREADS_INIT})
+	${CMAKE_THREAD_LIBS_INIT}
+	${Boost_LIBRARIES}
+	${DL_LIBRARY})
 
