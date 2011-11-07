@@ -192,7 +192,6 @@ set(SOURCES
 	Util/ResourceException.cpp
 	Sync/DeadlockException.cpp
 	Sync/LockException.cpp
-	Sync/RWMutex.cpp
 	Thread/ThreadPool.cpp
 	Thread/BaseThread.cpp
 	Thread/ThreadManager.cpp
@@ -237,6 +236,7 @@ set(SOURCES_WIN32
 	md/WIN32/Thread/ThreadWin32.cpp
 	md/WIN32/IO/Port/SerialPortImplWin32.cpp
 	md/WIN32/SystemWin32.cpp
+	Sync/RWMutex.cpp
 )
 source_group(Win32 FILES ${SOURCES_WIN32})
 
@@ -336,4 +336,8 @@ endif()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/vprDefines.h.cmake_in ${CMAKE_CURRENT_BINARY_DIR}/vprDefines.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/vprParam.h.in ${CMAKE_CURRENT_BINARY_DIR}/vprParam.h)
 
-add_library(vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR} ${SOURCES})
+add_library(vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR} SHARED ${SOURCES})
+target_link_libraries(vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR}
+	${UUID_LIBRARY}
+	${CPPDOM_LIBRARIES})
+

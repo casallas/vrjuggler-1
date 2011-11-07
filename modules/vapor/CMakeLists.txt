@@ -19,7 +19,7 @@ set(VER_STRING "\"${CPACK_PACKAGE_VERSION}\"")
 
 option(VPR_SIMULATOR "Use simulated interface." OFF)
 
-
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # OS define
 if(WIN32)
 	set(VPR_OS_Win32 1)
@@ -37,6 +37,7 @@ else()
 	option(VPR_USE_NSPR "Use NSPR system instead of POSIX." OFF)
 	if(VPR_USE_NSPR)
 		set(VPR_DOMAIN VPR_DOMAIN_NSPR)
+		set(VPR_POSIX_SEMAPHORES 1)
 		set(VPR_USE_POSIX OFF) # Not actually used in the header
 	else()
 		set(VPR_DOMAIN VPR_DOMAIN_POSIX)
@@ -57,7 +58,10 @@ message(STATUS "VPR: Using ${VPR_DOMAIN} system - Boost IO: ${VPR_USE_BOOST}.")
 find_package(Threads REQUIRED)
 if(CMAKE_USE_PTHREADS_INIT)
 	message(STATUS "VPR: Using pthreads.")
+	set(VPR_THREAD_SCOPE PTHREAD_SCOPE_SYSTEM)
+	set(VPR_POSIX_C_SOURCE 1)
 	set(VPR_USE_PTHREADS 1)
+	set(VPR_POSIX_SEMAPHORES 1)
 elseif(CMAKE_USE_WIN32_THREADS_INIT)
 	message(STATUS "VPR: Using Win32 threads.")
 	set(VPR_USE_WINTHREADS 1)
@@ -66,7 +70,14 @@ else()
 endif()
 
 
+include(CheckIncludeFileCXX)
+include(CheckSymbolExists)
+include(CheckStructHasMember)
 include(CheckTypeSize)
+include(CheckIncludeFiles)
+include(CheckCXXSourceCompiles)
+include(CheckFunctionExists)
+
 # Type sizes
 if(NOT VPR_USE_BOOST)
 	check_type_size(char SIZEOF_CHAR)
@@ -76,7 +87,98 @@ if(NOT VPR_USE_BOOST)
 	check_type_size(short SIZEOF_SHORT)
 endif()
 
-set(VPR_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+
+# General system header include checks
+check_include_file_cxx(strings.h HAVE_STRINGS_H)
+check_include_file_cxx(string.h HAVE_STRING_H)
+check_include_file_cxx(sys/capability.h HAVE_SYS_CAPABILITY_H)
+check_include_file_cxx(sys/file.h HAVE_SYS_FILE_H)
+check_include_file_cxx(sys/types.h HAVE_SYS_TYPES_H)
+check_include_file_cxx(unistd.h HAVE_UNISTD_H)
+check_include_file_cxx(bstring.h HAVE_BSTRING_H)
+
+# Signal-related checks
+check_include_file_cxx(signal.h HAVE_SIGNAL_H)
+if(HAVE_SIGNAL_H)
+	check_symbol_exists(sigaction signal.h HAVE_SIGACTION)
+	check_symbol_exists(sigaddset signal.h HAVE_SIGADDSET)
+	check_symbol_exists(sigdelset signal.h HAVE_SIGDELSET)
+	check_symbol_exists(sigemptyset signal.h HAVE_SIGEMPTYSET)
+	check_symbol_exists(sigfillset signal.h HAVE_SIGFILLSET)
+	check_symbol_exists(sigismember signal.h HAVE_SIGISMEMBER)
+	#check_prototype_definition(signal "void (*signal(int sig, void (*func)(int)))(int)" void signal.h HAVE_SIGNAL_RETURN_VOID)
+	check_cxx_source_compiles("#include <signal.h>
+								extern \"C\" void (*signal(int sig, void (*func)(int)))(int);
+								int main(int argc, char * argv[]) {
+								return 0;
+								}" HAVE_SIGNAL_RETURN_VOID)
+	if(HAVE_SIGNAL_RETURN_VOID)
+		set(RETSIGTYPE void)
+	else()
+		set(RETSIGTYPE int)
+	endif()
+endif()
+
+# Time-related checks
+check_include_file_cxx(sys/time.h HAVE_SYS_TIME_H)
+check_include_file_cxx(time.h HAVE_TIME_H)
+if(HAVE_SYS_TIME_H AND HAVE_TIME_H)
+	check_include_files("time.h;sys/time.h" TIME_WITH_SYS_TIME)
+endif()
+if(HAVE_SYS_TIME_H)
+	# If these structs exist, they have these members for sure.
+	check_struct_has_member("struct timeval" tv_sec sys/time.h HAVE_TIMEVAL)
+	set(CMAKE_EXTRA_INCLUDE_FILES "sys/time.h")
+	check_type_size("struct timezone" HAVE_TIMEZONE)
+	set(CMAKE_EXTRA_INCLUDE_FILES)
+endif()
+
+# UUID checks
+check_include_file_cxx(uuid.h HAVE_UUID_H)
+check_include_file_cxx(uuid/uuid.h HAVE_UUID_UUID_H)
+check_include_file_cxx(sys/uuid.h HAVE_SYS_UUID_H)
+
+find_library(LIBUUID_LIBRARY uuid)
+if(LIBUUID_LIBRARY)
+	set(CMAKE_REQUIRED_LIBRARIES ${LIBUUID_LIBRARY})
+	check_function_exists(uuid_create HAVE_UUID_CREATE)
+	check_function_exists(uuid_generate HAVE_UUID_GENERATE)
+	set(CMAKE_REQUIRED_LIBRARIES)
+else()
+	check_function_exists(uuid_create HAVE_UUID_CREATE_NOLIB)
+	check_function_exists(uuid_generate HAVE_UUID_GENERATE_NOLIB)
+endif()
+
+if(HAVE_UUID_CREATE_NOLIB)
+	set(UUID_LIBRARY)
+	set(VPR_USE_DCE_1_1_UUID 1)
+elseif(HAVE_UUID_GENERATE_NOLIB)
+	set(UUID_LIBRARY)
+	set(VPR_USE_LIBUUID 1)
+elseif(HAVE_UUID_CREATE)
+	set(UUID_LIBRARY ${LIBUUID_LIBRARY})
+	set(VPR_USE_DCE_1_1_UUID 1)
+elseif(HAVE_UUID_GENERATE)
+	set(UUID_LIBRARY ${LIBUUID_LIBRARY})
+	set(VPR_USE_LIBUUID 1)
+else()
+	# Fallback: included Leach UUID code
+	set(VPR_USE_LEACH_UUID 1)
+endif()
+
+# MD5 library
+option(VPR_USE_EMBEDDED_MD5C "Use embedded MD5 code - currently the only option." ON)
+if(VPR_USE_EMBEDDED_MD5C)
+	set(MD5_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../external/md5-c")
+	include_directories(${MD5_INCLUDE_DIR})
+else()
+	message(FATAL_ERROR "No alternate MD5 code currently available - must enable VPR_USE_EMBEDDED_MD5C")
+endif()
+
+# CPPDOM
+find_package(CPPDOM REQUIRED)
+
+set(VPR_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CPPDOM_INCLUDE_DIRS})
 
 include_directories(${VPR_INCLUDE_DIRECTORIES})
 

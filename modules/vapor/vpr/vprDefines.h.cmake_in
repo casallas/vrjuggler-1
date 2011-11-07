@@ -57,9 +57,6 @@
 /* Define to 1 if you have the <nspr/nspr.h> header file. */
 #cmakedefine HAVE_NSPR_NSPR_H
 
-/* define if the C++ compiler supports RTTI */
-#cmakedefine HAVE_RTTI
-
 /* Define to 1 if you have the sched_yield(2) function. */
 #cmakedefine HAVE_SCHED_YIELD
 
@@ -90,17 +87,8 @@
 /* Define to 1 if you have the `snprintf' function. */
 #cmakedefine HAVE_SNPRINTF
 
-/* define if the C++ compiler supports static_cast<> */
-#cmakedefine HAVE_STATIC_CAST
-
-/* define if the C++ compiler supports the standard library */
-#cmakedefine HAVE_STD
-
 /* Define to 1 if you have the <stdint.h> header file. */
 #cmakedefine HAVE_STDINT_H
-
-/* Define to 1 if you have the <stdlib.h> header file. */
-#cmakedefine HAVE_STDLIB_H
 
 /* Define to 1 if you have the `strerror' function. */
 #cmakedefine HAVE_STRERROR
@@ -125,18 +113,6 @@
 
 /* Define to 1 if you have the <sys/ioctl.h> header file. */
 #cmakedefine HAVE_SYS_IOCTL_H
-
-/* Define to 1 if you have the <sys/socket.h> header file. */
-#cmakedefine HAVE_SYS_SOCKET_H
-
-/* Define to 1 if you have the <sys/stat.h> header file. */
-#cmakedefine HAVE_SYS_STAT_H
-
-/* Define to 1 if you have the <sys/stdsyms.h> header file. */
-#cmakedefine HAVE_SYS_STDSYMS_H
-
-/* Define to 1 if you have the <sys/sysinfo.h> header file. */
-#cmakedefine HAVE_SYS_SYSINFO_H
 
 /* Define to 1 if you have the <sys/time.h> header file. */
 #cmakedefine HAVE_SYS_TIME_H
@@ -190,23 +166,22 @@
 #cmakedefine PACKAGE_VERSION
 
 /* Define as the return type of signal handlers (`int' or `void'). */
-#cmakedefine RETSIGTYPE
-
-/* Define if using POSIX threads. */
-#cmakedefine RWSTD_MULTI_THREAD
-
-/* Define if using POSIX threads. */
-#cmakedefine RW_MULTI_THREAD
+#define RETSIGTYPE @RETSIGTYPE@
 
 /* The size of `char', as computed by sizeof. */
-/* The size of `int', as computed by sizeof. */
-/* The size of `long', as computed by sizeof. */
-/* The size of `long long', as computed by sizeof. */
-/* The size of `short', as computed by sizeof. */
-@VPR_SIZEOF_MACROS@
+@SIZEOF_CHAR_CODE@
 
-/* Define to 1 if you have the ANSI C header files. */
-#cmakedefine STDC_HEADERS
+/* The size of `int', as computed by sizeof. */
+@SIZEOF_INT_CODE@
+
+/* The size of `long', as computed by sizeof. */
+@SIZEOF_LONG_CODE@
+
+/* The size of `long long', as computed by sizeof. */
+@SIZEOF_LONG_LONG_CODE@
+
+/* The size of `short', as computed by sizeof. */
+@SIZEOF_SHORT_CODE@
 
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #cmakedefine TIME_WITH_SYS_TIME
@@ -307,26 +282,3 @@
 /* define if compiling on a Win32 platform */
 #cmakedefine _MBCS
 
-/* define if using POSIX threads Draft 10 */
-#cmakedefine _PTHREADS_DRAFT_10
-
-/* define if using POSIX threads Draft 4 */
-#cmakedefine _PTHREADS_DRAFT_4
-
-/* Define if using POSIX threads. */
-#cmakedefine _REENTRANT
-
-/* Define if using POSIX threads. */
-#cmakedefine _THREAD_SAFE
-
-/* Define to int if the in_addr_t type is not available. */
-#cmakedefine in_addr_t
-
-/* Define to unsigned int if the sigset_t type is not available. */
-#cmakedefine sigset_t
-
-/* Define to `unsigned int' if <sys/types.h> does not define. */
-#cmakedefine size_t
-
-/* define to 'int' if your system does not have socklen_t */
-#cmakedefine socklen_t
