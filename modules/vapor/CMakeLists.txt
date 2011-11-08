@@ -29,8 +29,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(CPPDOM REQUIRED)
 find_package(Threads REQUIRED)
-find_package(Boost REQUIRED COMPONENTS filesystem system signals)
 find_package(cppunit)
+find_package(Boost REQUIRED COMPONENTS filesystem system signals)
 
 include(CTest)
 
@@ -74,6 +74,9 @@ else()
 endif()
 option(VPR_USE_BOOST "Use Boost IO " ${BOOST_DEFAULT})
 
+if(VPR_USE_BOOST)
+	find_package(Boost REQUIRED COMPONENTS filesystem system signals date_time regex)
+endif()
 message(STATUS "VPR: Using ${VPR_DOMAIN} system - Boost IO: ${VPR_USE_BOOST}.")
 
 # Threading
