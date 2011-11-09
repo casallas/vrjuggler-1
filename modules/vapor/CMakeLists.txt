@@ -124,6 +124,13 @@ check_include_file_cxx(sys/types.h HAVE_SYS_TYPES_H)
 check_include_file_cxx(unistd.h HAVE_UNISTD_H)
 check_include_file_cxx(bstring.h HAVE_BSTRING_H)
 
+# Numeric header needed only for simulated sockets
+check_include_file_cxx(ext/numeric HAVE_EXT_NUMERIC)
+
+# General function checks
+check_symbol_exists(snprintf "stdio.h" HAVE_SNPRINTF)
+check_symbol_exists(strerror "string.h" HAVE_STRERROR)
+
 # Signal-related checks
 check_include_file_cxx(signal.h HAVE_SIGNAL_H)
 if(HAVE_SIGNAL_H)
@@ -220,6 +227,8 @@ if(NOT VPR_USE_NSPR)
 #	endif()
 	check_include_file_cxx(netinet/in.h HAVE_NETINET_IN_H)
 	check_include_file_cxx(netinet/in.h HAVE_NETINET_TCP_H)
+	check_include_file_cxx(sys/socket.h HAVE_SYS_SOCKET_H)
+	check_include_file_cxx(ifaddrs.h HAVE_IFADDRS_H)
 	if(HAVE_SYS_TYPES_H AND HAVE_NETINET_IN_H)
 		check_struct_has_member(sockaddr_in sin_len "sys/types.h;netinet/in.h" HAVE_SIN_LEN)
 	endif()
@@ -233,7 +242,23 @@ if(NOT VPR_USE_NSPR)
 			endif()
 		endif()
 	endif()
+	if(HAVE_SYS_TYPES_H AND HAVE_IFADDRS_H)
+		if(HAVE_SYS_SOCKET_H)
+			check_symbol_exists(getifaddrs "sys/types.h;sys/socket.h;ifaddrs.h" HAVE_GETIFADDRS)
+		else()
+			check_symbol_exists(getifaddrs "sys/types.h;ifaddrs.h" HAVE_GETIFADDRS)
+		endif()
+	endif()
 endif()
+
+# Unordered ("hash") structures
+check_include_file_cxx(hash_map HAVE_HASH_MAP)
+check_include_file_cxx(hash_map.h HAVE_HASH_MAP_H)
+check_include_file_cxx(ext/hash_map HAVE_EXT_HASH_MAP)
+
+check_include_file_cxx(hash_set HAVE_HASH_SET)
+check_include_file_cxx(hash_set.h HAVE_HASH_SET_H)
+check_include_file_cxx(ext/hash_set HAVE_EXT_HASH_SET)
 
 # Dynamic libraries
 if(NOT WIN32)
