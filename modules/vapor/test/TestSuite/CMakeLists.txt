@@ -88,7 +88,7 @@ if(CPPUNIT_FOUND)
 	include_directories(. ${CPPUNIT_INCLUDE_DIRS})
 	add_definitions(-DNO_CPPUNIT_METRICREGISTRY)
 	add_executable(vpr_testsuite_runner ${SOURCES})
-	target_link_libraries(vpr_testsuite_runner vpr-${MAJOR_VER_NUMBER}_${MINOR_VER_NUMBER} ${CPPUNIT_LIBRARIES})
+	target_link_libraries(vpr_testsuite_runner vpr ${CPPUNIT_LIBRARIES})
 	add_test(NAME VPR-testsuite-noninteractive
 		COMMAND
 		${CMAKE_COMMAND} -E chdir "${CMAKE_CURRENT_SOURCE_DIR}" "$<TARGET_FILE:vpr_testsuite_runner>")

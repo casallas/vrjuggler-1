@@ -363,8 +363,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/vprDefines.h.cmake_in ${CMAKE_CURRENT
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/vprParam.h.in ${CMAKE_CURRENT_BINARY_DIR}/vprParam.h)
 add_definitions(-D_VPR_BUILD_)
 
-add_library(vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR} SHARED ${HEADERS} ${SOURCES})
-target_link_libraries(vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR}
+add_library(vpr SHARED ${HEADERS} ${SOURCES})
+target_link_libraries(vpr
 	${UUID_LIBRARY}
 	${CPPDOM_LIBRARIES}
 	${CMAKE_THREAD_LIBS_INIT}
