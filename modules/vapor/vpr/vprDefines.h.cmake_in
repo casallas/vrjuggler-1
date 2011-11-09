@@ -18,14 +18,8 @@
 /* Define to 1 if you have the <ext/numeric> header file. */
 #cmakedefine HAVE_EXT_NUMERIC
 
-/* Define to 1 if you have the <fcntl.h> header file. */
-#cmakedefine HAVE_FCNTL_H
-
 /* Define to 1 if you have the `getifaddrs' function. */
 #cmakedefine HAVE_GETIFADDRS
-
-/* Define to 1 if you have the `gettimeofday' function. */
-#cmakedefine HAVE_GETTIMEOFDAY
 
 /* Define to 1 if you have the <hash_map> header file. */
 #cmakedefine HAVE_HASH_MAP
@@ -38,27 +32,6 @@
 
 /* Define to 1 if you have the <hash_set.h> header file. */
 #cmakedefine HAVE_HASH_SET_H
-
-/* Define to 1 if you have the <inttypes.h> header file. */
-#cmakedefine HAVE_INTTYPES_H
-
-/* Define to 1 if you have the <limits.h> header file. */
-#cmakedefine HAVE_LIMITS_H
-
-/* Define to 1 if you have the <memory.h> header file. */
-#cmakedefine HAVE_MEMORY_H
-
-/* define if the C++ compiler supports namespaces */
-#cmakedefine HAVE_NAMESPACE
-
-/* Define to 1 if you have the <nspr.h> header file. */
-#cmakedefine HAVE_NSPR_H
-
-/* Define to 1 if you have the <nspr/nspr.h> header file. */
-#cmakedefine HAVE_NSPR_NSPR_H
-
-/* Define to 1 if you have the sched_yield(2) function. */
-#cmakedefine HAVE_SCHED_YIELD
 
 /* Define to 1 if you have the `sigaction' function. */
 #cmakedefine HAVE_SIGACTION
@@ -99,20 +72,11 @@
 /* Define to 1 if you have the <strings.h> header file. */
 #cmakedefine HAVE_STRINGS_H
 
-/* Define to 1 if you have the <string.h> header file. */
-#cmakedefine HAVE_STRING_H
-
 /* Define to 1 if you have the <sys/capability.h> header file. */
 #cmakedefine HAVE_SYS_CAPABILITY_H
 
 /* Define to 1 if you have the <sys/file.h> header file. */
 #cmakedefine HAVE_SYS_FILE_H
-
-/* Define to 1 if you have the <sys/filio.h> header file. */
-#cmakedefine HAVE_SYS_FILIO_H
-
-/* Define to 1 if you have the <sys/ioctl.h> header file. */
-#cmakedefine HAVE_SYS_IOCTL_H
 
 /* Define to 1 if you have the <sys/time.h> header file. */
 #cmakedefine HAVE_SYS_TIME_H
@@ -122,12 +86,6 @@
 
 /* Define to 1 if you have the <sys/uuid.h> header file. */
 #cmakedefine HAVE_SYS_UUID_H
-
-/* define if the C++ compiler supports basic templates */
-#cmakedefine HAVE_TEMPLATES
-
-/* Define to 1 if you have the <termios.h> header file. */
-#cmakedefine HAVE_TERMIOS_H
 
 /* Define if the timeval type is available. */
 #cmakedefine HAVE_TIMEVAL
@@ -263,19 +221,4 @@
 
 /* Define if using Windows threads. */
 #cmakedefine VPR_USE_WINTHREADS
-
-/* Define if building on Darwin or IRIX. */
-#cmakedefine _BSD_TYPES
-
-/* Define if building on HP-UX. */
-#cmakedefine _CMA_NOWRAPPERS_
-
-/* Define if compiling on Linux with GCC older than 3.0. */
-#cmakedefine _GNU_SOURCE
-
-/* Define if building on HP-UX. */
-#cmakedefine _INCLUDE_TERMIO
-
-/* define if compiling on a Win32 platform */
-#cmakedefine _MBCS
 
