@@ -211,14 +211,6 @@ else()
 		set(VPR_USE_LIBUUID OFF)
 	endif()
 endif()
-# MD5 library
-option(VPR_USE_EMBEDDED_MD5C "Use embedded MD5 code - currently the only option." ON)
-if(VPR_USE_EMBEDDED_MD5C)
-	set(MD5_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../external/md5-c")
-	include_directories(${MD5_INCLUDE_DIR})
-else()
-	message(FATAL_ERROR "No alternate MD5 code currently available - must enable VPR_USE_EMBEDDED_MD5C")
-endif()
 
 # Networking
 if(NOT VPR_USE_NSPR)

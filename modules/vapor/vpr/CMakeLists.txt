@@ -317,11 +317,12 @@ set(SOURCES_DYNLOAD
 source_group(DynLoad FILES ${SOURCES_DYNLOAD})
 list(APPEND SOURCES ${SOURCES_DYNLOAD})
 
-set(SOURCES_MD5C
-	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/md5-c/md5.h
-	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/md5-c/global.h
-	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/md5-c/md5c.c)
-source_group(MD5C FILES ${SOURCES_MD5C})
+set(SOURCES_LIBMD5RFC
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/libmd5-rfc/md5.h
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/libmd5-rfc/md5.c)
+source_group(libmd5-rfc FILES ${SOURCES_LIBMD5RFC})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../external/libmd5-rfc)
+list(APPEND SOURCES ${SOURCES_LIBMD5RFC})
 
 set(SOURCES_LEACHUUID
 	${CMAKE_CURRENT_SOURCE_DIR}/../../../external/leach-uuid/uuid/sysdep.c
@@ -352,10 +353,6 @@ endif()
 
 if(VPR_USE_LEACH_UUID)
 	list(APPEND SOURCES ${SOURCES_LEACHUUID})
-endif()
-
-if(VPR_USE_EMBEDDED_MD5C)
-	list(APPEND SOURCES ${SOURCES_MD5C})
 endif()
 
 
