@@ -253,6 +253,9 @@ check_include_file_cxx(hash_set HAVE_HASH_SET)
 check_include_file_cxx(hash_set.h HAVE_HASH_SET_H)
 check_include_file_cxx(ext/hash_set HAVE_EXT_HASH_SET)
 
+# Backtrace support
+check_symbol_exists(backtrace "execinfo.h" HAVE_BACKTRACE)
+
 # Dynamic libraries
 if(NOT WIN32)
 	find_library(LIBDL_LIBRARY dl)
