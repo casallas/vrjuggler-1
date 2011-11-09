@@ -363,6 +363,10 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/vprDefines.h.cmake_in ${CMAKE_CURRENT
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/vprParam.h.in ${CMAKE_CURRENT_BINARY_DIR}/vprParam.h)
 add_definitions(-D_VPR_BUILD_)
 
+if(WIN32)
+	add_definitions(-DCPPDOM_DYN_LINK -DBOOST_ALL_DYN_LINK)
+endif()
+
 add_library(vpr SHARED ${HEADERS} ${SOURCES})
 target_link_libraries(vpr
 	${UUID_LIBRARY}
@@ -371,3 +375,11 @@ target_link_libraries(vpr
 	${Boost_LIBRARIES}
 	${DL_LIBRARY})
 
+if(WIN32)
+	target_link_libraries(vpr dbghelp rpcrt4)
+	set_property(TARGET vpr
+		PROPERTY OUTPUT_NAME vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR}_${CPACK_PACKAGE_VERSION_PATCH})
+else()
+	set_property(TARGET vpr
+		PROPERTY OUTPUT_NAME vpr-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR})
+endif()
