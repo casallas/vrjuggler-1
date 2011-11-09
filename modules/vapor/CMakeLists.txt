@@ -130,6 +130,7 @@ check_include_file_cxx(ext/numeric HAVE_EXT_NUMERIC)
 # General function checks
 check_symbol_exists(snprintf "stdio.h" HAVE_SNPRINTF)
 check_symbol_exists(strerror "string.h" HAVE_STRERROR)
+check_symbol_exists(strerror_r "string.h" HAVE_STRERROR_R)
 
 # Signal-related checks
 check_include_file_cxx(signal.h HAVE_SIGNAL_H)
