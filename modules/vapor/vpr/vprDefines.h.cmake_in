@@ -221,11 +221,11 @@
 #define sigset_t unsigned int
 #endif
 
-#ifdef WIN32
-#  define VPR_OS_Win32
+#ifdef WIN64
 /* Define if building on the Win64 platform. */
-#elif defined(WIN64)
 #  define VPR_OS_Win64
+#elif defined(WIN32)
+#  define VPR_OS_Win32
 #endif
 
 /* Define if using POSIX threads. */
