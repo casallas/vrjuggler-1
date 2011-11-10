@@ -160,13 +160,13 @@
 #cmakedefine VPR_OS_Linux
 
 /* Define to match the output of running 'uname -r'. */
-#cmakedefine VPR_OS_RELEASE
+#define VPR_OS_RELEASE @CMAKE_SYSTEM_VERSION@
 
 /* Define to match the numeric major version number of the target OS. */
-#cmakedefine VPR_OS_RELEASE_MAJOR
+#cmakedefine VPR_OS_RELEASE_MAJOR @VPR_OS_RELEASE_MAJOR@
 
 /* Define to match the numeric minor version number of the target OS. */
-#cmakedefine VPR_OS_RELEASE_MINOR
+#cmakedefine VPR_OS_RELEASE_MINOR @VPR_OS_RELEASE_MINOR@
 
 /* Define if building on Solaris/SunOS. */
 #cmakedefine VPR_OS_Solaris

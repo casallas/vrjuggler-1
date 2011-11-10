@@ -267,6 +267,11 @@ if(NOT WIN32)
 	endif()
 endif()
 
+# Target system release
+if("${CMAKE_SYSTEM_VERSION}" MATCHES "^([0-9]*)[.]([0-9]*)")
+	set(VPR_OS_RELEASE_MAJOR ${CMAKE_MATCH_1})
+	set(VPR_OS_RELEASE_MINOR ${CMAKE_MATCH_2})
+endif()
 
 include_directories(${VPR_INCLUDE_DIRECTORIES})
 
