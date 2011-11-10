@@ -184,7 +184,7 @@
 #cmakedefine VPR_USE_BOOST
 
 /* Define to be the POSIX threads constant for thread scoping. */
-#define VPR_THREAD_SCOPE @VPR_THREAD_SCOPE@
+#cmakedefine VPR_THREAD_SCOPE @VPR_THREAD_SCOPE@
 
 /* Define to 1 if you have the DCE 1.1 UUID functions (uuid_create(3), etc.).
    */
