@@ -174,21 +174,6 @@
 /* Define if building on a Win32 platform. */
 #cmakedefine VPR_OS_Windows
 
-#ifdef VPR_OS_Windows
-/* Define to unsigned int if the sigset_t type is not available. */
-#define sigset_t unsigned int
-#endif
-
-#ifdef WIN64
-/* Define if building on the Win64 platform. */
-#  define VPR_OS_Win64
-#elif defined(WIN32)
-#  define VPR_OS_Win32
-#endif
-
-/* Define if using POSIX threads. */
-#cmakedefine VPR_POSIX_C_SOURCE
-
 /* Define if using POSIX semaphores. */
 #cmakedefine VPR_POSIX_SEMAPHORES
 
@@ -221,4 +206,29 @@
 
 /* Define if using Windows threads. */
 #cmakedefine VPR_USE_WINTHREADS
+
+
+#ifdef VPR_OS_Windows
+/* Define to unsigned int if the sigset_t type is not available. */
+#  define sigset_t unsigned int
+#endif
+
+#ifdef WIN64
+/* Define if building on the Win64 platform. */
+#  define VPR_OS_Win64
+#elif defined(WIN32)
+#  define VPR_OS_Win32
+#endif
+
+#ifdef VPR_USE_PTHREADS
+#  if defined(VPR_OS_IRIX) || defined(VPR_OS_Linux) || defined(VPR_OS_Solaris)
+#    define VPR_POSIX_C_SOURCE 199506L
+#  else
+#    define VPR_POSIX_C_SOURCE 2
+#  endif
+#endif
+
+#ifdef VPR_OS_Darwin
+#  define _BSD_TYPES 1
+#endif
 
