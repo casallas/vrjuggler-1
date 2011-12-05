@@ -1,3 +1,5 @@
 add_subdirectory(vapor)
 add_subdirectory(jackal)
-add_subdirectory(sonix)
+if(BUILD_SONIX)
+	add_subdirectory(sonix)
+endif()

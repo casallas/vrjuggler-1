@@ -25,4 +25,6 @@ if(NOT SHARE_OUTPUT_DIRECTORY)
 	set(SHARE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/share)
 endif()
 
+option(BUILD_SONIX "Should we build the Sonix library?" ON)
+
 add_subdirectory(modules)
