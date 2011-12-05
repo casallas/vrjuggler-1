@@ -362,10 +362,6 @@ vrjugglersuite_create_version_rc()
 
 add_definitions(-D_VPR_BUILD_)
 
-if(WIN32)
-	add_definitions(-DCPPDOM_DYN_LINK -DBOOST_ALL_DYN_LINK)
-endif()
-
 add_library(vpr SHARED ${HEADERS} ${SOURCES})
 target_link_libraries(vpr
 	${UUID_LIBRARY}

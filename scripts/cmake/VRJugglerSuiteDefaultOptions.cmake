@@ -37,6 +37,10 @@ if(MSVC)
 	endif()
 endif()
 
+if(WIN32)
+	add_definitions(-DCPPDOM_DYN_LINK -DBOOST_ALL_DYN_LINK)
+endif()
+
 function(vrjugglersuite_create_version_rc)
 	configure_file("${VRJUGGLERSUITE_MODULE_DIR}/version.rc.cmake_in" "${CMAKE_CURRENT_BINARY_DIR}/version.rc")
 endfunction()
