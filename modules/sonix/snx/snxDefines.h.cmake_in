@@ -1,0 +1,5 @@
+/* Define if full package versioning capabilities are enabled */
+#cmakedefine SNX_USE_VERSIONING @SNX_USE_VERSIONING@
+
+/* Sonix version string */
+#cmakedefine SNX_VERSION_DOT "@SNX_VERSION_DOT@"
