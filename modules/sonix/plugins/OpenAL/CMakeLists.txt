@@ -9,3 +9,7 @@ add_library(OpenAL_snd
 	openal.rc)
 
 target_link_libraries(OpenAL_snd sonix ${ALUT_LIBRARIES})
+
+install(TARGETS OpenAL_snd
+	LIBRARY DESTINATION lib COMPONENT sonix-runtime-openal
+	RUNTIME DESTINATION bin COMPONENT sonix-runtime-openal)
