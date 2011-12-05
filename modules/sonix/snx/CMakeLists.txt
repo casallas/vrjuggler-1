@@ -30,6 +30,7 @@ if(WIN32)
 	add_definitions(-DCPPDOM_DYN_LINK -DBOOST_ALL_DYN_LINK)
 endif()
 
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/snxParam.h.in" "${CMAKE_CURRENT_BINARY_DIR}/snxParam.h")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/snxDefines.h.cmake_in" "${CMAKE_CURRENT_BINARY_DIR}/snxDefines.h")
 
 add_library(sonix SHARED ${HEADERS} ${SOURCES})
