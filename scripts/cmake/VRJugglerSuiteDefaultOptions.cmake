@@ -29,11 +29,18 @@ option(BUILD_VERSIONED_DIRECTORIES "Should we version the directories for plugin
 
 if(MSVC)
 	option(BUILD_WITHOUT_COMMON_WARNINGS "Should we disable some distracting build warnings?" ON)
-	# Disable some warnings
-	# 4275: non dll-interface class used as base for dll-interface class
-	# 4251: needs to have dll-interface to be used by clients of class
 	if(BUILD_WITHOUT_COMMON_WARNINGS)
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4275 /wd4251")
+		# Disable some warnings
+		# 4275: non dll-interface class used as base for dll-interface class
+		# 4251: needs to have dll-interface to be used by clients of class
+		# 4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4275 /wd4251 /wd4290")
+
+		# Deprecation warnings for strerror, etc.
+		add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+
+		# Warning related to checked iterators
+		add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 	endif()
 endif()
 
