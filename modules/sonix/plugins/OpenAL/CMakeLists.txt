@@ -8,4 +8,4 @@ add_library(OpenAL_snd
 	OpenALSoundImplementation.h
 	openal.rc)
 
-target_link_libraries(OpenAL_snd ${ALUT_LIBRARIES})
+target_link_libraries(OpenAL_snd sonix ${ALUT_LIBRARIES})
