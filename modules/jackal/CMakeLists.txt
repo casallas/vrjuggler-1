@@ -53,8 +53,10 @@ include_directories(${JCCL_INCLUDE_DIRECTORIES})
 
 if(BUILD_VERSIONED_DIRECTORIES)
 	set(JCCL_SHARE_DIR jccl-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
+	set(JCCL_INCLUDE_PREFIX include/jccl-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
 else()
 	set(JCCL_SHARE_DIR jccl)
+	set(JCCL_INCLUDE_PREFIX include)
 endif()
 
 add_subdirectory(common/jccl)
@@ -134,6 +136,17 @@ else()
 	set_property(TARGET jccl
 		PROPERTY OUTPUT_NAME_DEBUG jccl_d-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR})
 endif()
+
+
+install(TARGETS jccl EXPORT jcclexport
+	LIBRARY DESTINATION lib COMPONENT jccl-runtime
+	RUNTIME DESTINATION bin COMPONENT jccl-runtime
+	ARCHIVE DESTINATION lib COMPONENT jccl-dev)
+
+install(DIRECTORY common/jccl config/jccl rtrc/jccl
+	DESTINATION ${JCCL_INCLUDE_PREFIX}
+	COMPONENT jccl-dev
+	FILES_MATCHING PATTERN *.h)
 
 if(BUILD_TESTING)
 #	add_subdirectory(test)

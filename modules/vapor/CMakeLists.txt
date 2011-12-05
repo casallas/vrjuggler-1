@@ -278,8 +278,18 @@ if(NOT (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
 endif()
 include_directories(${VPR_INCLUDE_DIRECTORIES})
 
+if(BUILD_VERSIONED_DIRECTORIES)
+	set(VPR_INCLUDE_PREFIX include/vpr-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
+else()
+	set(VPR_INCLUDE_PREFIX include)
+endif()
 
 add_subdirectory(vpr)
+
+install(DIRECTORY vpr
+	DESTINATION ${VPR_INCLUDE_PREFIX}
+	COMPONENT vpr-dev
+	FILES_MATCHING PATTERN *.h)
 
 if(BUILD_TESTING)
 	add_subdirectory(test)

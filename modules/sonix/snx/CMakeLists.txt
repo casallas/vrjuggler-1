@@ -35,6 +35,10 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/snxParam.h.in" "${CMAKE_CURRENT_BINA
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/snxDefines.h.cmake_in" "${CMAKE_CURRENT_BINARY_DIR}/snxDefines.h")
 vrjugglersuite_create_version_rc()
 
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/snxParam.h" "${CMAKE_CURRENT_BINARY_DIR}/snxDefines.h"
+	DESTINATION ${SNX_INCLUDE_PREFIX}/snx
+	COMPONENT sonix-dev)
+
 add_library(sonix SHARED ${HEADERS} ${SOURCES})
 target_link_libraries(sonix
 	${JCCL_LIBRARIES})
@@ -52,3 +56,9 @@ else()
 	set_property(TARGET sonix
 		PROPERTY OUTPUT_NAME_DEBUG sonix_d-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR})
 endif()
+
+install(TARGETS sonix EXPORT sonixexport
+	LIBRARY DESTINATION lib COMPONENT sonix-runtime
+	RUNTIME DESTINATION bin COMPONENT sonix-runtime
+	ARCHIVE DESTINATION lib COMPONENT sonix-dev)
+
