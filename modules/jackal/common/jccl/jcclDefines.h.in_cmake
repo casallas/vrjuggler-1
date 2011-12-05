@@ -1,0 +1,8 @@
+/* Define if full package versioning capabilities are enabled */
+#cmakedefine JCCL_USE_VERSIONING @JCCL_USE_VERSIONING@
+
+/* Jackal version string */
+#cmakedefine JCCL_VERSION_DOT @JCCL_VERSION_DOT@
+
+/* Subdirectory of "share" */
+#cmakedefine JCCL_SHARE_DIR "@JCCL_SHARE_DIR@"
