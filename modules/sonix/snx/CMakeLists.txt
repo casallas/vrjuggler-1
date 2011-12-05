@@ -1,5 +1,5 @@
 
-add_definitions(-D_SNX_BUILD_  "-DSNX_SHARE_DIR=\"${SNX_SHARE_DIR}\"") # "-DJCCL_ROOT_DIR=\"${CMAKE_INSTALL_PREFIX}\""
+add_definitions(-D_SNX_BUILD_ "-DSNX_SHARE_DIR=\"${SNX_SHARE_DIR}\"")
 
 set(HEADERS
 	AutoLink.h
