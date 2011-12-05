@@ -24,7 +24,8 @@ set(SOURCES
 	SoundHandle.cpp
 	SoundImplementation.cpp
 	StubSoundImplementation.cpp
-	Util/Version.cpp)
+	Util/Version.cpp
+	../sonix.rc)
 
 if(WIN32)
 	add_definitions(-DCPPDOM_DYN_LINK -DBOOST_ALL_DYN_LINK)
