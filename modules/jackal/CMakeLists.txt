@@ -61,6 +61,10 @@ add_subdirectory(common/jccl)
 add_subdirectory(data)
 add_subdirectory(tools/xmlupdate)
 
+###
+# Library Build
+###
+
 set(SOURCES
 	common/jccl/jcclmain.cpp
 	common/jccl/Util/Version.cpp

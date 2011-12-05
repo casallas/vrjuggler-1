@@ -19,4 +19,7 @@ include(scripts/cmake/VRJugglerSuiteDefaultOptions.cmake)
 
 option(BUILD_SONIX "Should we build the Sonix library?" ON)
 
+###
+# Recurse into subdirectories
+###
 add_subdirectory(modules)
