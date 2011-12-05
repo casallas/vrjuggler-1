@@ -65,9 +65,16 @@ if(NOT SHARE_OUTPUT_DIRECTORY)
 endif()
 
 if(WIN32)
-	set(JCCL_SHARE_DIR jccl)
+	set(DEFAULT_VERSIONED OFF)
 else()
+	set(DEFAULT_VERSIONED ON)
+endif()
+option(BUILD_VERSIONED_DIRECTORIES "Should we version the directories for plugins and data?" ${DEFAULT_VERSIONED})
+
+if(BUILD_VERSIONED_DIRECTORIES)
 	set(JCCL_SHARE_DIR jccl-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
+else()
+	set(JCCL_SHARE_DIR jccl)
 endif()
 
 add_subdirectory(common/jccl)

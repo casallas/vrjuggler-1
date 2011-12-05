@@ -25,6 +25,17 @@ if(NOT SHARE_OUTPUT_DIRECTORY)
 	set(SHARE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/share)
 endif()
 
+###
+# Configuration
+###
+
 option(BUILD_SONIX "Should we build the Sonix library?" ON)
+
+if(WIN32)
+	set(DEFAULT_VERSIONED OFF)
+else()
+	set(DEFAULT_VERSIONED ON)
+endif()
+option(BUILD_VERSIONED_DIRECTORIES "Should we version the directories for plugins and data?" ${DEFAULT_VERSIONED})
 
 add_subdirectory(modules)
