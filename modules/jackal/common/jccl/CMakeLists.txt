@@ -4,6 +4,6 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/jcclDefines.h.cmake_in" "${CMAKE_CUR
 vrjugglersuite_create_version_rc()
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/jcclParam.h" "${CMAKE_CURRENT_BINARY_DIR}/jcclDefines.h"
-	DESTINATION ${VPR_INCLUDE_PREFIX}/jccl
+	DESTINATION ${JCCL_INCLUDE_PREFIX}/jccl
 	COMPONENT jccl-dev)
 
