@@ -67,11 +67,14 @@ endif()
 
 if(WIN32)
 	set(SNX_SHARE_DIR sonix)
+	set(SNX_LIB_DIR sonix)
 else()
 	set(SNX_SHARE_DIR sonix-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
+	set(SNX_LIB_DIR sonix-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
 endif()
 
 add_subdirectory(snx)
+add_subdirectory(plugins)
 
 if(BUILD_TESTING)
 #	add_subdirectory(test)
