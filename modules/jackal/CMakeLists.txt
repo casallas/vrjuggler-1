@@ -21,7 +21,7 @@ set(VER_STRING "\"${CPACK_PACKAGE_VERSION}\"")
 
 
 # CMake modules
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/cmake/VRJugglerSuiteDefaultOptions.cmake")
 
 ###
 # Dependencies
@@ -50,8 +50,6 @@ endif()
 
 
 include_directories(${JCCL_INCLUDE_DIRECTORIES})
-
-include(VRJugglerSuiteDefaultOptions)
 
 if(BUILD_VERSIONED_DIRECTORIES)
 	set(JCCL_SHARE_DIR jccl-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})

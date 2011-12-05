@@ -1,4 +1,12 @@
 
+if(__juggler_suite_default_options)
+	return()
+endif()
+set(__juggler_suite_default_options YES)
+
+get_filename_component(MODULE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+list(APPEND CMAKE_MODULE_PATH "${MODULE_DIR}")
+
 if(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 endif()
