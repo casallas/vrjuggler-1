@@ -4,8 +4,8 @@ if(__juggler_suite_default_options)
 endif()
 set(__juggler_suite_default_options YES)
 
-get_filename_component(MODULE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-list(APPEND CMAKE_MODULE_PATH "${MODULE_DIR}")
+get_filename_component(VRJUGGLERSUITE_MODULE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+list(APPEND CMAKE_MODULE_PATH "${VRJUGGLERSUITE_MODULE_DIR}")
 
 if(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
 	set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -27,3 +27,6 @@ else()
 endif()
 option(BUILD_VERSIONED_DIRECTORIES "Should we version the directories for plugins and data?" ${DEFAULT_VERSIONED})
 
+function(vrjugglersuite_create_version_rc)
+	configure_file("${VRJUGGLERSUITE_MODULE_DIR}/version.rc.cmake_in" "${CMAKE_CURRENT_BINARY_DIR}/version.rc")
+endfunction()
