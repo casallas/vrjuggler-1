@@ -27,6 +27,16 @@ else()
 endif()
 option(BUILD_VERSIONED_DIRECTORIES "Should we version the directories for plugins and data?" ${DEFAULT_VERSIONED})
 
+if(MSVC)
+	option(BUILD_WITHOUT_COMMON_WARNINGS "Should we disable some distracting build warnings?" ON)
+	# Disable some warnings
+	# 4275: non dll-interface class used as base for dll-interface class
+	# 4251: needs to have dll-interface to be used by clients of class
+	if(BUILD_WITHOUT_COMMON_WARNINGS)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4275 /wd4251")
+	endif()
+endif()
+
 function(vrjugglersuite_create_version_rc)
 	configure_file("${VRJUGGLERSUITE_MODULE_DIR}/version.rc.cmake_in" "${CMAKE_CURRENT_BINARY_DIR}/version.rc")
 endfunction()
