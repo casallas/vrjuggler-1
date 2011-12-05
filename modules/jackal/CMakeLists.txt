@@ -69,6 +69,7 @@ endif()
 
 add_subdirectory(common/jccl)
 add_subdirectory(data)
+add_subdirectory(tools/xmlupdate)
 
 set(SOURCES
 	common/jccl/jcclmain.cpp
