@@ -68,6 +68,7 @@ else()
 endif()
 
 add_subdirectory(common/jccl)
+add_subdirectory(data)
 
 set(SOURCES
 	common/jccl/jcclmain.cpp
