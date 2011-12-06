@@ -18,7 +18,7 @@ function(gadgeteer_add_driver _driver_name)
 	add_dependencies(gadgeteer_drivers ${_driver_name}_drv)
 endfunction()
 
-#add_subdirectory(3Dconnexion/SpaceBall)
+add_subdirectory(3Dconnexion/SpaceBall)
 #add_subdirectory(5DT/DataGlove)
 #add_subdirectory(5DT/DataGloveUltraWireless)
 #add_subdirectory(ART/DTrack)
