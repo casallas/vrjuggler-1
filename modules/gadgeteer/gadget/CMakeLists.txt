@@ -88,7 +88,7 @@ set(HEADERS
 	Type/KeyboardMouseProxy.h
 	Type/KeyboardMouseProxyPtr.h
 	Type/KeyboardMousePtr.h
-	Type/LinearSigmoidPositionFilter.h
+#	Type/LinearSigmoidPositionFilter.h # TODO: This file is broken!
 	Type/PositionData.h
 	Type/Position.h
 	Type/PositionInterface.h
@@ -157,7 +157,7 @@ set(SOURCES
 	Type/KeyboardMouse/KeyEvent.cpp
 	Type/KeyboardMouse/MouseEvent.cpp
 	Type/KeyboardMouseProxy.cpp
-	Type/LinearSigmoidPositionFilter.cpp
+#	Type/LinearSigmoidPositionFilter.cpp # TODO: This file is broken!
 	Type/Position.cpp
 	Type/PositionProxy.cpp
 	Type/Proxy.cpp
