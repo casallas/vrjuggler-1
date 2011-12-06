@@ -1,5 +1,5 @@
 
-add_definitions(-D_GADGET_BUILD_)
+add_definitions(-D_GADGET_BUILD_ "-DGADGET_SHARE_DIR=\"${GADGET_SHARE_DIR}\"" "-DGADGET_ROOT_DIR=\"${CMAKE_INSTALL_PREFIX}\"")
 
 set(HEADERS
 	AutoLink.h
@@ -169,8 +169,8 @@ set(SOURCES
 
 	../gadget.rc)
 
-set(GADGET_USE_COCOA OFF)
-set(GADGET_USE_X11 OFF)
+set(GADGET_USE_COCOA)
+set(GADGET_USE_X11)
 if(WIN32)
 	message(STATUS "Gadgeteer: Using Win32 native input for keyboard/mouse device")
 	list(APPEND SOURCES 
@@ -180,7 +180,7 @@ if(WIN32)
 		Devices/KeyboardMouseDevice/InputAreaWin32.h
 		Devices/KeyboardMouseDevice/InputWindowWin32.h)
 elseif(GADGETEER_USE_COCOA)	
-	set(GADGET_USE_COCOA ON)
+	set(GADGET_USE_COCOA 1)
 	message(STATUS "Gadgeteer: Using Cocoa input for keyboard/mouse device")
 	list(APPEND SOURCES 
 		Devices/KeyboardMouseDevice/InputAreaCocoa.mm
@@ -191,7 +191,7 @@ elseif(GADGETEER_USE_COCOA)
 		Devices/KeyboardMouseDevice/InputViewCocoa.h
 		Devices/KeyboardMouseDevice/InputWindowCocoa.h)
 else()
-	set(GADGET_USE_X11 ON)
+	set(GADGET_USE_X11 1)
 	message(STATUS "Gadgeteer: Using X11 input for keyboard/mouse device")
 	list(APPEND SOURCES 
 		Devices/KeyboardMouseDevice/InputAreaXWin.cpp
