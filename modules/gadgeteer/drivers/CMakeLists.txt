@@ -1,7 +1,7 @@
 
 
 set(CMAKE_SHARED_MODULE_PREFIX "")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${GADGET_LIB_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${GADGET_LIB_DIR}/drivers")
 
 function(gadgeteer_add_driver _driver_name)
 	add_library(${_driver_name}_drv
