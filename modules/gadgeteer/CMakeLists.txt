@@ -48,6 +48,10 @@ endif()
 # Configuration
 ###
 
+if(APPLE)
+	option(GADGETEER_USE_COCOA "Should we use Cocoa (Mac OS X native) input for keyboard/mouse devices? (Fallback is X11)" ON)
+endif()
+
 include_directories(${GADGET_INCLUDE_DIRECTORIES})
 
 if(BUILD_VERSIONED_DIRECTORIES)
