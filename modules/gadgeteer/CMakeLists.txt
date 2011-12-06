@@ -67,7 +67,8 @@ else()
 endif()
 
 add_subdirectory(gadget)
-#add_subdirectory(drivers)
+
+add_subdirectory(drivers)
 
 install(DIRECTORY cluster gadget plugins
 	DESTINATION ${GADGET_INCLUDE_PREFIX}
