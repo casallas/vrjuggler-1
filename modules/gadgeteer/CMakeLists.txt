@@ -69,10 +69,26 @@ endif()
 add_subdirectory(gadget)
 #add_subdirectory(drivers)
 
-install(DIRECTORY gadget
+install(DIRECTORY cluster gadget plugins
 	DESTINATION ${GADGET_INCLUDE_PREFIX}
 	COMPONENT gadget-dev
 	FILES_MATCHING PATTERN *.h)
+
+install(DIRECTORY data
+	DESTINATION share/${GADGET_SHARE_DIR}
+	COMPONENT gadget-runtime)
+
+install(DIRECTORY samples
+	DESTINATION share/${GADGET_SHARE_DIR}
+	COMPONENT gadget-samples)
+
+install(DIRECTORY tools
+	DESTINATION share/${GADGET_SHARE_DIR}
+	COMPONENT gadget-tools)
+
+install(DIRECTORY test
+	DESTINATION share/${GADGET_SHARE_DIR}
+	COMPONENT gadget-test)
 
 if(BUILD_TESTING)
 #	add_subdirectory(test)
