@@ -1,7 +1,10 @@
 
 #TODO DTK
 #todo Trackd
-#todo LinuxJoydev
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	add_subdirectory(LinuxJoydev)
+endif()
 
 find_package(VRPN)
 if(VRPN_FOUND)
