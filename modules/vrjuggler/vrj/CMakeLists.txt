@@ -1,5 +1,5 @@
 
-add_definitions(-D_VRJ_BUILD_ "-DVRJ_SHARE_DIR=\"${VRJ_SHARE_DIR}\"" "-DVRJ_ROOT_DIR=\"${CMAKE_INSTALL_PREFIX}\"")
+add_definitions(-D_VRJ_BUILD_ "-DVJ_SHARE_DIR=\"${VRJ_SHARE_DIR}\"" "-DVJ_ROOT_DIR=\"${CMAKE_INSTALL_PREFIX}\"")
 
 set(HEADERS
 	AutoLink.h
