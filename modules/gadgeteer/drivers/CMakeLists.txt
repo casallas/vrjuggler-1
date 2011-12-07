@@ -5,6 +5,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${GADGET_L
 add_custom_target(gadgeteer_drivers)
 
 function(gadgeteer_add_driver _driver_name)
+	add_definitions(-D_GADGET_DRIVER_BUILD_)
 	add_library(${_driver_name}_drv
 		MODULE ${ARGN})
 
