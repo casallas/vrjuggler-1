@@ -13,7 +13,7 @@ set(SOURCES
 
 install(FILES ${SOURCES}
 	COMPONENT jccl-runtime
-	DESTINATION ${JCCL_SHARE_DIR}/tools/xmlupdate)
+	DESTINATION share/${JCCL_SHARE_DIR}/tools/xmlupdate)
 
 file(MAKE_DIRECTORY "${SHARE_OUTPUT_DIRECTORY}/${JCCL_SHARE_DIR}/tools/xmlupdate")
 
