@@ -78,7 +78,7 @@ else()
 endif()
 
 # TODO: this may link with the wrong (framework) versions of OpenGL on a Mac X11 build
-find_library(OpenGL REQUIRED)
+find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 add_library(vrj_ogl SHARED ${HEADERS} ${SOURCES} ${OPENSG_HEADERS} ${OSG_HEADERS})
