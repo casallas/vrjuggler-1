@@ -249,6 +249,11 @@ add_library(gadget SHARED ${HEADERS} ${SOURCES})
 target_link_libraries(gadget
 	${JCCL_LIBRARIES})
 
+
+if(WIN32)
+	target_link_libraries(gadget comctl32)
+endif()
+
 if(WIN32)
 	set_property(TARGET gadget
 		PROPERTY OUTPUT_NAME gadget-${CPACK_PACKAGE_VERSION_MAJOR}_${CPACK_PACKAGE_VERSION_MINOR}_${CPACK_PACKAGE_VERSION_PATCH})
