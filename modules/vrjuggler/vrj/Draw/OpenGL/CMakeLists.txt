@@ -1,3 +1,5 @@
+add_definitions(-D_VRJ_OGL_BUILD_)
+
 set(HEADERS
 	../OGL/GlApp.h
 	../OGL/GlContextData.h
