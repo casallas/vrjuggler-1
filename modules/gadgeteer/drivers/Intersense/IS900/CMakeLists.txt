@@ -17,3 +17,6 @@ gadgeteer_add_driver(IS900
 	wsock.cpp
 	wsock.h)
 
+if(WIN32)
+	target_link_libraries(IS900_drv ws2_32)
+endif()
