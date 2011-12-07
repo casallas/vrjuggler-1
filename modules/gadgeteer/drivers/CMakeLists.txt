@@ -42,7 +42,12 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	add_subdirectory(Open/LinuxJoydev)
 endif()
 
-add_subdirectory(Open/Trackd)
+include(CheckIncludeFileCXX)
+check_include_file_cxx(sys/ipc.h HAVE_SYS_IPC_H)
+check_include_file_cxx(sys/shm.h HAVE_SYS_SHM_H)
+if(HAVE_SYS_IPC_H AND HAVE_SYS_SHM_H)
+	add_subdirectory(Open/Trackd)
+endif()
 
 find_package(VRPN)
 if(VRPN_FOUND)
