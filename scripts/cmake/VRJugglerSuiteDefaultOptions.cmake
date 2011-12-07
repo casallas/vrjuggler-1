@@ -42,6 +42,10 @@ if(BUILD_JAVA)
 	endif()
 endif()
 
+if(APPLE)
+	option(BUILD_WITH_COCOA "Should we build with Cocoa (Mac OS X native) code? (Alternative is X11)" ON)
+endif()
+
 if(MSVC)
 	option(BUILD_WITHOUT_COMMON_WARNINGS "Should we disable some distracting build warnings?" ON)
 	if(BUILD_WITHOUT_COMMON_WARNINGS)

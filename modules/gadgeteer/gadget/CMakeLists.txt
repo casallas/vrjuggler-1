@@ -215,7 +215,7 @@ if(WIN32)
 	list(APPEND HEADERS
 		Devices/KeyboardMouseDevice/InputAreaWin32.h
 		Devices/KeyboardMouseDevice/InputWindowWin32.h)
-elseif(GADGETEER_USE_COCOA)	
+elseif(BUILD_WITH_COCOA)
 	set(GADGET_USE_COCOA 1)
 	message(STATUS "Gadgeteer: Using Cocoa input for keyboard/mouse device")
 	list(APPEND SOURCES 
