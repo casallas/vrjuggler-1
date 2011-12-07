@@ -71,7 +71,7 @@ add_subdirectory(gadget)
 
 add_subdirectory(drivers)
 
-#add_subdirectory(plugins)
+add_subdirectory(plugins)
 
 install(DIRECTORY cluster gadget plugins
 	DESTINATION ${GADGET_INCLUDE_PREFIX}
