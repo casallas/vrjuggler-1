@@ -114,8 +114,6 @@ set(HEADERS
 
 set(SOURCES
 	Devices/KeyboardMouseDevice/InputArea.cpp
-	Devices/KeyboardMouseDevice/InputAreaXWin.cpp
-	Devices/KeyboardMouseDevice/InputWindowXWin.cpp
 	Devices/KeyboardMouseDevice/KeyboardMouseDevice.cpp
 	Devices/Sim/SimAnalog.cpp
 	Devices/Sim/SimDigital.cpp
