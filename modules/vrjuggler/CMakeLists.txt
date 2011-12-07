@@ -67,6 +67,7 @@ else()
 endif()
 
 add_subdirectory(vrj)
+add_subdirectory(vrj/Draw)
 
 install(DIRECTORY vrj
 	DESTINATION ${VRJ_INCLUDE_PREFIX}
