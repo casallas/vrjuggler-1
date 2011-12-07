@@ -132,3 +132,5 @@ install(TARGETS vrj EXPORT vrjexport
 	RUNTIME DESTINATION bin COMPONENT vrj-runtime
 	ARCHIVE DESTINATION lib COMPONENT vrj-dev)
 
+add_subdirectory(Draw)
+
