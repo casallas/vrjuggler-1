@@ -110,7 +110,31 @@ set(HEADERS
 	Util/DeviceSerializationTokens.h
 	Util/PathHelpers.h
 	Util/PluginVersionException.h
-	Util/Version.h)
+	Util/Version.h
+
+	../cluster/ClusterDelta.h
+	../cluster/ClusterDepChecker.h
+	../cluster/ClusterException.h
+	../cluster/ClusterManager.h
+	../cluster/ClusterNetwork.h
+	../cluster/ClusterPlugin.h
+	../cluster/ClusterPluginPtr.h
+	../cluster/ConfigHandler.h
+	../cluster/ConfigHandlerPtr.h
+	../cluster/Packets/ConfigPacket.h
+	../cluster/Packets/ConfigPacketPtr.h
+	../cluster/Packets/DataPacket.h
+	../cluster/Packets/DataPacketPtr.h
+	../cluster/Packets/DeviceAck.h
+	../cluster/Packets/DeviceAckPtr.h
+	../cluster/Packets/EndBlock.h
+	../cluster/Packets/EndBlockPtr.h
+	../cluster/Packets/Header.h
+	../cluster/Packets/HeaderPtr.h
+	../cluster/Packets/PacketFactory.h
+	../cluster/Packets/Packet.h
+	../cluster/Packets/PacketPtr.h
+	../cluster/PluginConfig.h)
 
 set(SOURCES
 	Devices/KeyboardMouseDevice/InputArea.cpp
@@ -164,6 +188,20 @@ set(SOURCES
 	Util/PathHelpers.cpp
 	Util/PluginVersionException.cpp
 	Util/Version.cpp
+
+	../cluster/ClusterDelta.cpp
+	../cluster/ClusterDepChecker.cpp
+	../cluster/ClusterException.cpp
+	../cluster/ClusterManager.cpp
+	../cluster/ClusterPlugin.cpp
+	../cluster/ConfigHandler.cpp
+	../cluster/Packets/ConfigPacket.cpp
+	../cluster/Packets/DataPacket.cpp
+	../cluster/Packets/DeviceAck.cpp
+	../cluster/Packets/EndBlock.cpp
+	../cluster/Packets/Header.cpp
+	../cluster/Packets/Packet.cpp
+	../cluster/Packets/PacketFactory.cpp
 
 	../gadget.rc)
 
