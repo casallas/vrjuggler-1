@@ -119,7 +119,9 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/vrjParam.h" "${CMAKE_CURRENT_BINARY_D
 
 add_library(vrj SHARED ${HEADERS} ${SOURCES})
 target_link_libraries(vrj
-	${GADGET_LIBRARIES})
+	${GADGET_LIBRARIES}
+	${SNX_LIBRARIES}
+	${Boost_PROGRAM_OPTIONS_LIBRARY})
 
 
 if(WIN32)
