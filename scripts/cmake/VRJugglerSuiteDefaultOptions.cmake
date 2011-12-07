@@ -83,3 +83,15 @@ endif()
 function(vrjugglersuite_create_version_rc)
 	configure_file("${VRJUGGLERSUITE_MODULE_DIR}/version.rc.cmake_in" "${CMAKE_CURRENT_BINARY_DIR}/version.rc")
 endfunction()
+
+function(vrjugglersuite_set_versioned_library_output_name _target)
+	if(WIN32)
+		set(_vertag ${MAJOR_VER_NUMBER}_${MINOR_VER_NUMBER}_${PATCH_VER_NUMBER})
+	else()
+		set(_vertag ${MAJOR_VER_NUMBER}_${MINOR_VER_NUMBER})
+	endif()
+	set_property(TARGET ${_target}
+		PROPERTY OUTPUT_NAME ${_target}-${_vertag})
+	set_property(TARGET ${_target}
+		PROPERTY OUTPUT_NAME_DEBUG ${_target}_d-${_vertag})
+endfunction()
