@@ -58,6 +58,6 @@ endif()
 
 add_subdirectory(Polhemus/Fastrak)
 add_subdirectory(USDigital/SerialEncoder)
-#add_subdirectory(VirtualTechnologies/CyberGlove)
+#add_subdirectory(VirtualTechnologies/CyberGlove) #TODO Broken
 #add_subdirectory(VRCO/TrackdAPI)
 
