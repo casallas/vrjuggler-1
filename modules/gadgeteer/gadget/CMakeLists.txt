@@ -249,10 +249,11 @@ add_library(gadget SHARED ${HEADERS} ${SOURCES})
 target_link_libraries(gadget
 	${JCCL_LIBRARIES})
 
-
 if(WIN32)
 	target_link_libraries(gadget comctl32)
 endif()
+
+set_target_properties(gadget PROPERTIES FOLDER "${VRJUGGLERSUITE_CORELIB_PROJECT_FOLDER}")
 
 if(WIN32)
 	set_property(TARGET gadget

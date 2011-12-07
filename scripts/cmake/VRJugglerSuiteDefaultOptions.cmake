@@ -63,6 +63,19 @@ if(MSVC)
 	endif()
 endif()
 
+if(MSVC)
+	option(BUILD_WITH_PROJECT_FOLDERS
+		"Use project folders in build system - not compatible with Visual C++ Express editions!"
+		OFF)
+else()
+	set(BUILD_WITH_PROJECT_FOLDERS ON)
+endif()
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ${BUILD_WITH_PROJECT_FOLDERS})
+
+set(VRJUGGLERSUITE_CORELIB_PROJECT_FOLDER "Core VR Juggler libraries")
+set(VRJUGGLERSUITE_META_PROJECT_FOLDER "Convenience targets")
+
 if(WIN32)
 	add_definitions(-DCPPDOM_DYN_LINK -DBOOST_ALL_DYN_LINK)
 endif()

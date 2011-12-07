@@ -3,6 +3,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${GADGET_L
 
 # Target to build all configured drivers
 add_custom_target(gadgeteer_drivers)
+set_target_properties(gadgeteer_drivers PROPERTIES FOLDER "${VRJUGGLERSUITE_META_PROJECT_FOLDER}")
 
 function(gadgeteer_add_driver _driver_name)
 	add_definitions(-D_GADGET_DRIVER_BUILD_)
@@ -11,6 +12,7 @@ function(gadgeteer_add_driver _driver_name)
 
 	target_link_libraries(${_driver_name}_drv gadget)
 
+	set_target_properties(${_driver_name}_drv PROPERTIES FOLDER "Gadgeteer drivers")
 	install(TARGETS ${_driver_name}_drv
 		LIBRARY DESTINATION lib/${GADGET_LIB_DIR}/drivers COMPONENT gadgeteer-runtime-drivers
 		RUNTIME DESTINATION lib/${GADGET_LIB_DIR}/drivers COMPONENT gadgeteer-runtime-drivers)

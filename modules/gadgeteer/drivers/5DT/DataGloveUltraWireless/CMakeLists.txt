@@ -9,5 +9,6 @@ if(BUILD_TESTING)
 	add_executable(gadgeteer_DataGloveUltraWireless_testapp
 		glove.cpp)
 	target_link_libraries(gadgeteer_DataGloveUltraWireless_testapp ${VPR_LIBRARIES})
+	set_target_properties(gadgeteer_DataGloveUltraWireless_testapp PROPERTIES FOLDER "Gadgeteer driver testing code")
 endif()
 

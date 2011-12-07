@@ -123,6 +123,7 @@ target_link_libraries(vrj
 	${SNX_LIBRARIES}
 	${Boost_PROGRAM_OPTIONS_LIBRARY})
 
+set_target_properties(vrj PROPERTIES FOLDER "${VRJUGGLERSUITE_CORELIB_PROJECT_FOLDER}")
 
 if(WIN32)
 	set_property(TARGET vrj

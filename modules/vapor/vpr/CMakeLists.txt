@@ -370,6 +370,8 @@ target_link_libraries(vpr
 	${Boost_LIBRARIES}
 	${DL_LIBRARY})
 
+set_target_properties(vpr PROPERTIES FOLDER "${VRJUGGLERSUITE_CORELIB_PROJECT_FOLDER}")
+
 if(WIN32)
 	target_link_libraries(vpr dbghelp rpcrt4)
 	set_property(TARGET vpr
