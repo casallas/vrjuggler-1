@@ -29,6 +29,7 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/cmake/VRJugglerSuiteDefaultOp
 find_package(GMTL REQUIRED)
 if(TARGET vpr AND TARGET jccl)
 	set(JCCL_LIBRARIES jccl)
+	set(VPR_LIBRARIES vpr)
 else()
 	message(FATAL_ERROR "Building Gadgeteer separate from the rest of the build has not yet been implemented!")
 	#find_package(VPR REQUIRED) # TODO make this right
