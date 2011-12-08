@@ -52,10 +52,10 @@ endif()
 include_directories(${JCCL_INCLUDE_DIRECTORIES})
 
 if(BUILD_VERSIONED_DIRECTORIES)
-	set(JCCL_SHARE_DIR jccl-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
+	set(JCCL_SHARE_DIR share/jccl-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
 	set(JCCL_INCLUDE_PREFIX include/jccl-${MAJOR_VER_NUMBER}.${MINOR_VER_NUMBER})
 else()
-	set(JCCL_SHARE_DIR jccl)
+	set(JCCL_SHARE_DIR share/jccl)
 	set(JCCL_INCLUDE_PREFIX include)
 endif()
 
