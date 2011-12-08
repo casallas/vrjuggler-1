@@ -60,7 +60,7 @@ if(BUILD_VERSIONED_DIRECTORIES)
 else()
 	set(GADGET_SHARE_DIR gadgeteer)
 	set(GADGET_LIB_DIR gadgeteer)
-	set(GADGET_INCLUDE_PREFIX include/gadgeteer)
+	set(GADGET_INCLUDE_PREFIX include)
 endif()
 
 add_subdirectory(gadget)

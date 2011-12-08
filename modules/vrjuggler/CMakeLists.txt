@@ -63,7 +63,7 @@ if(BUILD_VERSIONED_DIRECTORIES)
 else()
 	set(VRJ_SHARE_DIR vrjuggler)
 	set(VRJ_LIB_DIR vrjuggler)
-	set(VRJ_INCLUDE_PREFIX include/vrjuggler)
+	set(VRJ_INCLUDE_PREFIX include)
 endif()
 
 add_subdirectory(vrj)
