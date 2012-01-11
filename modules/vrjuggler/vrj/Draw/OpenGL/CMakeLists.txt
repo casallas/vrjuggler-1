@@ -22,15 +22,13 @@ set(HEADERS
 	WindowXWin.h)
 
 set(OPENSG_HEADERS
-	../OpenSG/App.h
-	../OpenSG/OpenSGApp.h)
+	../OpenSG/App.h)
 source_group(OpenSG FILES ${OPENSG_HEADERS})
 
 set(OSG_HEADERS
 	../OSG/App.h
 	../OSG/AppPager.h
-	../OSG/AppViewer.h
-	../OSG/OsgApp.h)
+	../OSG/AppViewer.h)
 source_group(OSG FILES ${OSG_HEADERS})
 
 set(SOURCES

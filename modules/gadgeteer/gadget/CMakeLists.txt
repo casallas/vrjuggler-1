@@ -173,9 +173,6 @@ set(SOURCES
 	Type/GloveProxy.cpp
 	Type/Input.cpp
 	Type/KeyboardMouse.cpp
-	Type/KeyboardMouse/Event.cpp
-	Type/KeyboardMouse/KeyEvent.cpp
-	Type/KeyboardMouse/MouseEvent.cpp
 	Type/KeyboardMouseProxy.cpp
 #	Type/LinearSigmoidPositionFilter.cpp # TODO: This file is broken!
 	Type/Position.cpp
