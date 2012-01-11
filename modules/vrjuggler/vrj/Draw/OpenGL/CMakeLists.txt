@@ -1,13 +1,6 @@
 add_definitions(-D_VRJ_OGL_BUILD_)
 
 set(HEADERS
-	../OGL/GlApp.h
-	../OGL/GlContextData.h
-	../OGL/GlDrawManager.h
-	../OGL/GlProcApp.h
-	../OGL/GlUserData.h
-	../OGL/GlWindow.h
-	../OGL/GlWindowPtr.h
 	App.h
 	BasicSimulator.h
 	Config.h

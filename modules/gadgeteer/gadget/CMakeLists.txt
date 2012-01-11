@@ -70,10 +70,8 @@ set(HEADERS
 	Type/GloveProxy.h
 	Type/GloveProxyPtr.h
 	Type/GlovePtr.h
-	Type/InputBaseTypes.h
 	Type/InputData.h
 	Type/Input.h
-	Type/InputMixer.h
 	Type/InputPtr.h
 	Type/KeyboardMouse/EventFactory.h
 	Type/KeyboardMouse/Event.h

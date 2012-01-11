@@ -39,21 +39,6 @@ set(HEADERS
 	md/BOOST/IO/Socket/SocketStreamImplBOOST.h
 	md/BOOST/IO/Socket/SocketImplBOOST.h
 	md/BOOST/IO/Socket/SocketDatagramImplBOOST.h
-	md/SIM/Network/NetworkGraph.h
-	md/SIM/Network/MessagePtr.h
-	md/SIM/Network/NetworkNode.h
-	md/SIM/Network/NetworkLine.h
-	md/SIM/Network/Message.h
-	md/SIM/Controller.h
-	md/SIM/Clock.h
-	md/SIM/IO/SelectorImplSIM.h
-	md/SIM/IO/Socket/SocketStreamImplSIM.h
-	md/SIM/IO/Socket/InetAddrSIM.h
-	md/SIM/IO/Socket/SocketDatagramImplSIM.h
-	md/SIM/IO/Socket/SocketImplSIM.h
-	md/SIM/IO/IOSysSIM.h
-	md/SIM/DNS.h
-	md/SIM/SocketManager.h
 	md/POSIX/DynLoad/LibraryUNIX.h
 	md/POSIX/Util/ErrorImplPosix.h
 	md/POSIX/SystemPosix.h
