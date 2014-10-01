@@ -53,7 +53,7 @@ namespace vpr
  *
  * @todo Add smart buffering for type sizes.
  */
-class VPR_CLASS_API BufferObjectWriter : public ObjectWriter
+class VPR_API BufferObjectWriter : public ObjectWriter
 {
 public:
    /**
@@ -170,6 +170,34 @@ public:
    virtual void writeUint64(vpr::Uint64 val);
 
    /**
+    * Writes out the single byte.
+    *
+    * @post data = old(data)+val, \c mCurHeadPos advanced 1.
+    *
+    * @throw IOException Thrown if I/O errors occur while writing to the
+    *                    underlying data source.
+    */
+   virtual void writeInt8(vpr::Int8 val);
+
+   /**
+    * @throw IOException Thrown if I/O errors occur while writing to the
+    *                    underlying data source.
+    */
+   virtual void writeInt16(vpr::Int16 val);
+
+   /**
+    * @throw IOException Thrown if I/O errors occur while writing to the
+    *                    underlying data source.
+    */
+   virtual void writeInt32(vpr::Int32 val);
+
+   /**
+    * @throw IOException Thrown if I/O errors occur while writing to the
+    *                    underlying data source.
+    */
+   virtual void writeInt64(vpr::Int64 val);
+
+   /**
     * @throw IOException Thrown if I/O errors occur while writing to the
     *                    underlying data source.
     */
@@ -201,103 +229,12 @@ public:
    inline void writeRaw(vpr::Uint8* data,
                         const unsigned int len = 1);
 
-private:
-   /**
-    * Do not allow copy.  To do so we would need to make the memory handling
-    * much smarter.
-    */
-   BufferObjectWriter(const BufferObjectWriter& rhs)
-      : vpr::ObjectWriter(rhs)
-   {
-      /* Do nothihng. */ ;
-   }
-
 public:
    /** If true we allocated the data buffer and should delete it. */
    bool                       mOwnDataBuffer;
    std::vector<vpr::Uint8>*   mData;
    unsigned int               mCurHeadPos;
 };
-
-inline void BufferObjectWriter::writeUint8(vpr::Uint8 val)
-{
-   writeRaw(&val, 1);
-}
-
-inline void BufferObjectWriter::writeUint16(vpr::Uint16 val)
-{
-   vpr::Uint16 nw_val = vpr::System::Htons(val);
-
-   writeRaw((vpr::Uint8*) &nw_val, 2);
-}
-
-inline void BufferObjectWriter::writeUint32(vpr::Uint32 val)
-{
-   vpr::Uint32 nw_val = vpr::System::Htonl(val);
-
-   writeRaw((vpr::Uint8*) &nw_val, 4);
-}
-
-inline void BufferObjectWriter::writeUint64(vpr::Uint64 val)
-{
-   vpr::Uint64 nw_val = vpr::System::Htonll(val);
-
-   writeRaw((vpr::Uint8*) &nw_val, 8);
-}
-
-inline void BufferObjectWriter::writeFloat(float val)
-{
-   // We are writing the float as a 4 byte value
-   BOOST_STATIC_ASSERT(sizeof(float) == 4);
-   union
-   {
-     float       floatVal;
-     vpr::Uint32 intVal;
-   } data;
-
-   data.floatVal = val;
-   data.intVal   = vpr::System::Htonl(data.intVal);
-
-   writeRaw((vpr::Uint8*) &data.intVal, 4);
-}
-
-inline void BufferObjectWriter::writeDouble(double val)
-{
-   // We are writing the double as a 8 byte value
-   BOOST_STATIC_ASSERT(sizeof(double) == 8);
-   union
-   {
-     double      doubleVal;
-     vpr::Uint64 intVal;
-   } data;
-
-   data.doubleVal = val;
-   data.intVal    = vpr::System::Htonll(data.intVal);
-
-   writeRaw((vpr::Uint8*) &data.intVal, 8);
-}
-
-inline void BufferObjectWriter::writeString(std::string val)
-{
-   // Note: If you change this, you need to change STRING_LENGTH_SIZE
-   writeUint32(val.size());
-
-   for ( vpr::Uint32 i = 0; i < val.length(); ++i )
-   {
-      writeRaw((vpr::Uint8*) &val[i], 1);
-   }
-}
-
-inline void BufferObjectWriter::writeBool(bool val)
-{
-   // Darwin uses four bytes (!) for bools.
-#ifdef VPR_OS_Darwin
-   vpr::Uint8 temp = (vpr::Uint8) val;
-   writeRaw((vpr::Uint8*) &temp, 1);
-#else
-   writeRaw((vpr::Uint8*) &val, 1);
-#endif
-}
 
 inline void BufferObjectWriter::writeRaw(vpr::Uint8* data,
                                          const unsigned int len)

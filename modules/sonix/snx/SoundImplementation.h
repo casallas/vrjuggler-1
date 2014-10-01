@@ -57,7 +57,7 @@ namespace snx
  *
  * Sound implementation.
  */
-class SNX_CLASS_API SoundImplementation : public ISoundImplementation
+class SNX_API SoundImplementation : public ISoundImplementation
 {
 public:
    /** Default constructor. */
@@ -117,7 +117,7 @@ public:
     *
     * @param alias The alias of the sound to query.
     */
-   virtual bool isPlaying( const std::string& alias )
+   virtual bool isPlaying(const std::string& alias) const
    {
       boost::ignore_unused_variable_warning(alias);
       return false;
@@ -142,9 +142,9 @@ public:
     *
     * @param alias The alias of the sound to query.
     */
-   virtual bool isRetriggerable( const std::string& alias )
+   virtual bool isRetriggerable(const std::string& alias) const
    {
-      return bool( this->lookup( alias ).retriggerable == true );
+      return this->lookup(alias).retriggerable;
    }
 
    /**
@@ -185,7 +185,7 @@ public:
     *
     * @param alias The alias of the sound to query.
     */
-   virtual bool isPaused( const std::string& alias )
+   virtual bool isPaused(const std::string& alias) const
    {
       boost::ignore_unused_variable_warning(alias);
       return false;
@@ -211,7 +211,7 @@ public:
     *
     * @param alias The alias of the sound to query.
     */
-   virtual bool isAmbient( const std::string& alias )
+   virtual bool isAmbient(const std::string& alias) const
    {
       return this->lookup( alias ).ambient;
    }
@@ -284,9 +284,10 @@ public:
     *              OpenGL coordinates).
     */
    virtual void getPosition(const std::string& alias, float& x, float& y,
-                            float& z)
+                            float& z) const
    {
-      vprASSERT(this->isStarted() == true && "must call startAPI prior to this function");
+      vprASSERT(this->isStarted() == true &&
+                "must call startAPI prior to this function");
 
       x = this->lookup( alias ).position[0];
       y = this->lookup( alias ).position[1];
@@ -310,9 +311,10 @@ public:
     *
     * @param mat Storage for returning the position of the listener.
     */
-   virtual void getListenerPosition( gmtl::Matrix44f& mat )
+   virtual void getListenerPosition(gmtl::Matrix44f& mat) const
    {
-      vprASSERT(this->isStarted() == true && "must call startAPI prior to this function");
+      vprASSERT(this->isStarted() == true &&
+                "must call startAPI prior to this function");
       mat = mListenerPos;
    }
 
@@ -429,17 +431,16 @@ public:
     */
    virtual void unbind( const std::string& alias ) = 0;
 
-   snx::SoundInfo& lookup( const std::string& alias )
-   {
-      return mSounds[alias];
-   }
+   snx::SoundInfo& lookup(const std::string& alias);
+
+   const snx::SoundInfo& lookup(const std::string& alias) const;
 
    void setName( const std::string& name )
    {
       mName = name;
    }
 
-   std::string& name()
+   const std::string& name() const
    {
       return mName;
    }
@@ -451,7 +452,9 @@ protected:
    std::string mName;
 
    snx::SoundAPIInfo mSoundAPIInfo;
-   std::map<std::string, snx::SoundInfo> mSounds;
+
+   typedef std::map<std::string, snx::SoundInfo> sound_map_t;
+   sound_map_t mSounds;
 
    gmtl::Matrix44f mListenerPos; /**< Position of the observer/listener. */
 };

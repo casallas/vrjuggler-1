@@ -38,6 +38,8 @@
 
 #include <vpr/vprConfig.h>
 
+#include <boost/noncopyable.hpp>
+
 #include <vpr/IO/IOException.h>
 #include <vpr/Util/AttributeMapBase.h>
 #include <vpr/vprTypes.h>
@@ -50,7 +52,9 @@ namespace vpr
  *
  * Interface used to read object data from a stream.
  */
-class VPR_CLASS_API ObjectReader : public AttributeMapBase
+class VPR_API ObjectReader
+   : public AttributeMapBase
+   , private boost::noncopyable
 {
 protected:
    ObjectReader();
@@ -178,6 +182,34 @@ public:
     * @throw IOException  If some other I/O error occurs while reading from
     *                     the underlying data source.
     */
+   virtual vpr::Int8 readInt8() = 0;
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual vpr::Int16 readInt16() = 0;
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual vpr::Int32 readInt32() = 0;
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual vpr::Int64 readInt64() = 0;
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
    virtual float readFloat() = 0;
 
    /**
@@ -249,6 +281,46 @@ public:
     * @throw IOException  If some other I/O error occurs while reading from
     *                     the underlying data source.
     */
+   virtual void readInt8(vpr::Int8& val)
+   {
+      val = this->readInt8();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual void readInt16(vpr::Int16& val)
+   {
+      val = this->readInt16();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual void readInt32(vpr::Int32& val)
+   {
+      val = this->readInt32();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual void readInt64(vpr::Int64& val)
+   {
+      val = this->readInt64();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
    virtual void readFloat(float& val)
    {
       val = this->readFloat();
@@ -290,5 +362,6 @@ protected:
 };
 
 } // namespace vpr
+
 
 #endif

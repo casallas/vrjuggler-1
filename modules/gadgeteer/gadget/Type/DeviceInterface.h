@@ -47,7 +47,7 @@ namespace gadget
  * @note The init() function should be called in the init() function of the
  *       user application.
  */
-class GADGET_CLASS_API BaseDeviceInterface
+class GADGET_API BaseDeviceInterface
 {
 public:
    BaseDeviceInterface();
@@ -240,6 +240,7 @@ typedef DeviceInterface<class KeyboardMouseProxy> KeyboardMouseInterface;
 typedef DeviceInterface<class PositionProxy>      PositionInterface;
 typedef DeviceInterface<class RumbleProxy>        RumbleInterface;
 typedef DeviceInterface<class StringProxy>        StringInterface;
+typedef DeviceInterface<class HatProxy>           HatInterface;
 //@}
 
 } // end namespace

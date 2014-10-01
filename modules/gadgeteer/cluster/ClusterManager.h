@@ -29,7 +29,7 @@
 
 #include <gadget/gadgetConfig.h>
 
-#include <boost/signals.hpp>
+#include <boost/signals2.hpp>
 
 #include <vpr/Util/GUID.h>
 #include <vpr/Util/Singleton.h>
@@ -58,7 +58,8 @@ const int DEFAULT_SLAVE_PORT = 12599;
  *
  * Manages the synchronization of all ClusterPlugins.
  */
-class GADGET_CLASS_API ClusterManager : public jccl::ConfigElementHandler
+class GADGET_API ClusterManager
+   : public jccl::ConfigElementHandler
 {
    vprSingletonHeader( ClusterManager );
 protected:
@@ -305,8 +306,8 @@ public:
    /**
     * Output the current status of the cluster.
     */
-   friend GADGET_API( std::ostream& ) operator<<( std::ostream& out,
-                                                  ClusterManager& mgr );
+   friend GADGET_API std::ostream& operator<<(std::ostream& out,
+                                              ClusterManager& mgr);
 
    /**
     * Return the number of times that preDraw() has been called.
@@ -353,7 +354,7 @@ private:
 
    vpr::Uint64                  mPreDrawCallCount;       /**< # calls to preDraw() */
    vpr::Uint64                  mPostPostFrameCallCount; /**< # calls to postPostFrame() */
-   boost::signals::connection   mConfigChangeConn;
+   boost::signals2::connection  mConfigChangeConn;
 };
 
 } // end of cluster namespace

@@ -31,8 +31,6 @@
 
 #pragma warning(disable:4786)  // identifier truncated to 255 characters in the debug information
 
-#include <GL/gl.h>
-
 #include <gadget/Devices/KeyboardMouseDevice/InputAreaWin32.h>
 #include <vrj/Draw/OpenGL/Window.h>
 #include <vrj/Draw/OpenGL/ExtensionLoaderWGL.h>
@@ -71,7 +69,7 @@ namespace opengl
  *
  * @note This class was renamed from vrj::GlWindowWin32 in VR Juggler 2.3.11.
  */
-class VJ_OGL_CLASS_API WindowWin32
+class VJ_OGL_API WindowWin32
    : public vrj::opengl::Window
    , public gadget::InputAreaWin32
 {

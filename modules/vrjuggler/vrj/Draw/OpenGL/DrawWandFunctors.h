@@ -30,15 +30,9 @@
 #include <vpr/vprConfig.h>
 #include <vrj/Draw/OpenGL/Config.h>
 
-#ifdef VPR_OS_Darwin
-#   include <OpenGL/gl.h>
-#   include <OpenGL/glu.h>
-#else
-#   include <GL/gl.h>
-#   include <GL/glu.h>
-#endif
-
+#include <vrj/Draw/OpenGL/ExtensionLoader.h>
 #include <vrj/Draw/OpenGL/DrawObjectFunctor.h>
+#include <vrj/Draw/OpenGL/DrawManager.h>
 
 
 namespace vrj
@@ -72,9 +66,8 @@ public:
    virtual void draw(vrj::UserPtr user);
 
 protected:
-   GLUquadricObj* mQuadObj;
+   void* mQuadObj;
 };
-
 
 /** \class vrj::opengl::DrawRightAngleWandFunctor DrawWandFunctors.h vrj/Draw/OpenGL/DrawWandFunctors.h
  *
@@ -86,6 +79,11 @@ protected:
 class DrawRightAngleWandFunctor : public vrj::opengl::DrawObjectFunctor
 {
 public:
+   DrawRightAngleWandFunctor()
+   {
+      /* Do nothing. */ ;
+   }
+
    virtual ~DrawRightAngleWandFunctor()
    {
       /* Do nothing. */ ;
@@ -93,13 +91,67 @@ public:
 
    /** Called to initialize any context specific information. */
    virtual void contextInit()
-   {;}
+   {
+      /* Do nothing. */ ;
+   }
 
    /**
     * Callback function for drawing.  Called when the object should be drawn.
     * @pre GL context is set and ready to go.
     */
    virtual void draw(vrj::UserPtr user);
+
+};
+
+/** \class vrj::opengl::DrawRightAngleWandCoreFunctor DrawWandFunctors.h vrj/Draw/OpenGL/DrawWandFunctors.h
+ *
+ * Draw a wand with a right angle using the OpenGL core profile.
+ *
+ */
+class DrawRightAngleWandCoreFunctor : public vrj::opengl::DrawObjectFunctor
+{
+public:
+   DrawRightAngleWandCoreFunctor()
+      : mProgram(0)
+      , muMVMatrixHandle(0)
+      , muPMatrixHandle(0)
+      , maVertexCoordHandle(0)
+      , maVertexNormalHandle(0)
+      , muVertexColorHandle(0)
+      , mVertexArrayBufferID(0)
+      , mVertexCoordBufferID(0)
+      , mVertexNormalBufferID(0)
+      , mIndexBufferID(0)
+   {
+      /* Do nothing. */ ;
+   }
+
+   virtual ~DrawRightAngleWandCoreFunctor()
+   {
+      /* Do nothing. */ ;
+   }
+
+   /** Called to initialize any context specific information. */
+   virtual void contextInit();
+
+   /**
+    * Callback function for drawing.  Called when the object should be drawn.
+    * @pre GL context is set and ready to go.
+    */
+   virtual void draw(vrj::UserPtr user);
+
+private:
+   unsigned int mProgram;
+   int muMVMatrixHandle;
+   int muPMatrixHandle;
+   int maVertexCoordHandle;
+   int maVertexNormalHandle;
+   int muVertexColorHandle;
+   unsigned int mVertexArrayBufferID;
+   unsigned int mVertexCoordBufferID;
+   unsigned int mVertexNormalBufferID;
+   unsigned int mIndexBufferID;
+
 };
 
 } // End of opengl namespace

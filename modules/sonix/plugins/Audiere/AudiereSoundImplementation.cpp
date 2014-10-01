@@ -55,17 +55,17 @@
 extern "C"
 {
 
-SNX_PLUGIN_EXPORT(const char*) getVersion()
+SNX_PLUGIN_EXPORT const char* getVersion()
 {
    return "sonix xx.xx.xx";
 }
 
-SNX_PLUGIN_EXPORT(const char*) getName()
+SNX_PLUGIN_EXPORT const char* getName()
 {
    return "Audiere";
 }
 
-SNX_PLUGIN_EXPORT(snx::ISoundImplementation*) newPlugin()
+SNX_PLUGIN_EXPORT snx::ISoundImplementation* newPlugin()
 {
    return new snx::AudiereSoundImplementation;
 }
@@ -158,7 +158,7 @@ void AudiereSoundImplementation::trigger(const std::string& alias,
    }
 }
 
-bool AudiereSoundImplementation::isPlaying( const std::string& alias )
+bool AudiereSoundImplementation::isPlaying(const std::string& alias) const
 {
    vprASSERT(mDev.get() != NULL &&
              "startAPI must be called prior to this function");
@@ -170,7 +170,9 @@ bool AudiereSoundImplementation::isPlaying( const std::string& alias )
    {
       if ( trackMap.count(alias) > 0 )
       {
-         is_playing = trackMap[alias]->isPlaying();
+         track_map_t::const_iterator i = trackMap.find(alias);
+         vprASSERT(i != trackMap.end());
+         is_playing = (*i).second->isPlaying();
       }
    }
    else
@@ -187,7 +189,7 @@ bool AudiereSoundImplementation::isPlaying( const std::string& alias )
 }
 
 /** if the sound is paused, then return true. */
-bool AudiereSoundImplementation::isPaused( const std::string& alias )
+bool AudiereSoundImplementation::isPaused(const std::string& alias) const
 {
    vprASSERT(mDev.get() != NULL &&
              "startAPI must be called prior to this function");
@@ -281,8 +283,9 @@ void AudiereSoundImplementation::setPosition(const std::string& alias,
  * @input alias is a name that has been associate()d with some sound data
  * @output x,y,z are returned in OpenGL coordinates.
  */
-void AudiereSoundImplementation::getPosition(const std::string& alias,
-                                             float& x, float& y, float& z)
+void
+AudiereSoundImplementation::getPosition(const std::string& alias,
+                                        float& x, float& y, float& z) const
 {
    snx::SoundImplementation::getPosition( alias, x, y, z );
 }
@@ -301,7 +304,8 @@ void AudiereSoundImplementation::setListenerPosition(const gmtl::Matrix44f& mat)
 /**
  * get the position of the listener
  */
-void AudiereSoundImplementation::getListenerPosition( gmtl::Matrix44f& mat )
+void
+AudiereSoundImplementation::getListenerPosition(gmtl::Matrix44f& mat) const
 {
    snx::SoundImplementation::getListenerPosition( mat );
 }

@@ -35,14 +35,22 @@
 
 #include <gadget/Type/InputDevice.h>
 
+#ifdef HAVE_SDL2
+#include <SDL2/SDL.h>
+#else
 #include <SDL/SDL.h>
+#endif
 
 #if !SDL_VERSION_ATLEAST(1,2,0)
 #  error "SDL Version 1.2 is required.  Try configure.pl --with-sdl=no"
 #endif
 
 #if SDL_VERSION_ATLEAST(1,3,0)
-#  include <SDL/SDL_haptic.h>
+#   ifdef HAVE_SDL2
+#      include <SDL2/SDL_haptic.h>
+#   else
+#      include <SDL/SDL_haptic.h>
+#   endif
 #else
 #  define SDL_Haptic void
 #endif
@@ -51,7 +59,7 @@ namespace gadget
 {
 
 class SdlJoystick
-   : public InputDevice<boost::mpl::inherit<Digital, Analog, Rumble>::type>
+   : public InputDevice<boost::mpl::inherit<Digital, Analog, Rumble, Hat>::type>
 {
 public:
    SdlJoystick();
@@ -76,6 +84,11 @@ public:
    virtual const AnalogData getAnalogData(int devNum=0)
    {
       return (mAxes[devNum]);
+   }
+
+   virtual const HatData getHatData(int devNum=0)
+   {
+      return (mHats[devNum]);
    }
 
    bool init();
@@ -160,6 +173,7 @@ private:
 
    std::vector<gadget::DigitalData> mButtons;
    std::vector<gadget::AnalogData> mAxes;
+   std::vector<gadget::HatData> mHats;
 };
 
 } // End of gadget namespace

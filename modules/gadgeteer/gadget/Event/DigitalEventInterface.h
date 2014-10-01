@@ -57,7 +57,7 @@ struct digital_event_tag : base_event_tag {};
  *
  * @since 2.1.13
  */
-class GADGET_CLASS_API DigitalSampleHandler
+class GADGET_API DigitalSampleHandler
 {
 public:
    typedef ProxyTraits<DigitalProxy>     device_type;
@@ -67,8 +67,8 @@ public:
 
    DigitalSampleHandler();
 
-   DigitalState::State getData(const sample_type& samples,
-                               const unsigned int unit);
+   const DigitalState::State& getData(const sample_type& samples,
+                                      const unsigned int unit);
 
 private:
    DigitalState::State mCurState;

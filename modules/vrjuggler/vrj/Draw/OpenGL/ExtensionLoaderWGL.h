@@ -31,20 +31,23 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <GL/gl.h>
-
 #include <vrj/Draw/OpenGL/ExtensionLoader.h>
 
 // WGL Defines
-#define WGL_CONTEXT_MAJOR_VERSION_ARB		    0x2091
-#define WGL_CONTEXT_MINOR_VERSION_ARB		    0x2092
-#define WGL_CONTEXT_LAYER_PLANE_ARB		        0x2093
-#define WGL_CONTEXT_FLAGS_ARB			        0x2094
-#define WGL_CONTEXT_DEBUG_BIT_ARB		        0x0001
-#define WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB	0x0002
+#define WGL_CONTEXT_MAJOR_VERSION_ARB                 0x2091
+#define WGL_CONTEXT_MINOR_VERSION_ARB                 0x2092
+#define WGL_CONTEXT_LAYER_PLANE_ARB                   0x2093
+#define WGL_CONTEXT_FLAGS_ARB                         0x2094
+#define WGL_CONTEXT_PROFILE_MASK_ARB                  0x9126
+
+#define WGL_CONTEXT_DEBUG_BIT_ARB                     0x0001
+#define WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB        0x0002
+
+#define WGL_CONTEXT_CORE_PROFILE_BIT_ARB              0x00000001
+#define WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB     0x00000002
 
 // New error returned by GetLastError
-#define	ERROR_INVALID_VERSION_ARB		        0x2095
+#define	ERROR_INVALID_VERSION_ARB                    0x2095
 
 namespace vrj
 {
@@ -73,16 +76,16 @@ public:
    /** Return true if we have support for NV swap group extensions. */
    bool hasSwapGroupNV();
 
-   BOOL wglJoinSwapGroupNV(HDC hdc, GLuint group);
+   BOOL wglJoinSwapGroupNV(HDC hdc, unsigned int group);
 
-   BOOL wglBindSwapBarrierNV(GLuint group, GLuint barrier);
+   BOOL wglBindSwapBarrierNV(unsigned int group, unsigned int barrier);
 
-   BOOL wglQuerySwapGroupNV(HDC hdc, GLuint* group, GLuint* barrier);
+   BOOL wglQuerySwapGroupNV(HDC hdc, unsigned int* group, unsigned int* barrier);
 
-   BOOL wglQueryMaxSwapGroupsNV(HDC hdc, GLuint* maxGroups,
-                                GLuint* maxBarriers);
+   BOOL wglQueryMaxSwapGroupsNV(HDC hdc, unsigned int* maxGroups,
+                                unsigned int* maxBarriers);
 
-   BOOL wglQueryFrameCountNV(HDC hdc, /*int screen,*/ GLuint* count);
+   BOOL wglQueryFrameCountNV(HDC hdc, /*int screen,*/ unsigned int* count);
 
    BOOL wglResetFrameCountNV(HDC hdc /*, int screen*/);
    //@}

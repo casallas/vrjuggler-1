@@ -33,12 +33,6 @@
 #include <stdio.h>
 #include <vpr/vpr.h>
 
-#ifdef VPR_OS_Darwin
-#   include <OpenGL/gl.h>
-#else
-#   include <GL/gl.h>
-#endif
-
 #include <vpr/Util/Debug.h>
 
 #include <vrj/Display/Display.h>
@@ -46,6 +40,7 @@
 #include <vrj/Display/Viewport.h>
 
 #include <vrj/Draw/OpenGL/WindowPtr.h>
+#include <vrj/Draw/OpenGL/ExtensionLoaderGL.h>
 
 
 namespace vrj
@@ -62,7 +57,7 @@ namespace opengl
  *
  * @note This class was renamed from vrj::GlWindow in VR Juggler 2.3.11.
  */
-class VJ_OGL_CLASS_API Window
+class VJ_OGL_API Window
 {
 protected:
    Window();
@@ -219,6 +214,11 @@ public:
       return mWindowId;
    }
 
+   ExtensionLoaderGL& getGLFunctions()
+   {
+      return *mGL;
+   }
+
    /** Called by event function to update size info. */
    // XXX: Should update Display configuration element in some way.
    void updateOriginSize(const int originX, const int originY, const int width,
@@ -249,7 +249,7 @@ public:
    }
 
    friend std::ostream& operator<<(std::ostream& out,
-                                   vrj::opengl::Window& win);
+                                   const vrj::opengl::Window& win);
 
 protected:
    /**
@@ -286,9 +286,12 @@ private:
    static int        mCurMaxWinId;  /**< The current maximum window id */
 
    static int getNextWindowId();
+
+   ExtensionLoaderGL* mGL;   /**< GL extensions for this window. */
+
 };
 
-// ostream& operator<<(ostream& out, vrj::opengl::Window& win);
+// ostream& operator<<(ostream& out, const vrj::opengl::Window& win);
 
 } // end opengl namespace
 

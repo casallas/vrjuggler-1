@@ -46,7 +46,7 @@ namespace vrj
  * Responsible for storing and computing projection information of a surface
  * specified.
  */
-class SurfaceProjection : public Projection
+class VJ_API SurfaceProjection : public Projection
 {
 protected:
    /**
@@ -141,7 +141,7 @@ public:
                                 const float scaleFactor);
 
    std::ostream& outStream(std::ostream& out,
-                           const unsigned int indentLevel = 0);
+                           const unsigned int indentLevel = 0) const;
 
 protected:
    /**

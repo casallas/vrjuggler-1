@@ -482,6 +482,15 @@ def postProcessOptions(options):
             os.environ['GADGET_TRACKD_API_H'] = '<%s>' % h
             break
 
+   # Determine if al.h is in the base include directory or in include\AL.
+   if os.environ['SDL_ROOT'] != '':
+      sdl2_path = os.path.join(os.environ['SDL_ROOT'], 'include', 'SDL2')
+      if os.path.exists(sdl2_path):
+         os.environ['HAVE_SDL2'] = 'HAVE_SDL2'
+         os.environ['SDL_LIB'] = 'SDL2.lib'
+      else:
+         os.environ['SDL_LIB'] = 'SDL.lib'
+
 def writeCacheFile(optionDict):
    cache_file = open(getCacheFileName(), 'w')
    for k, v in optionDict.iteritems():
@@ -1209,7 +1218,7 @@ def installDir(startDir, destDir, allowedExts = None, disallowedExts = None,
 def installLibs(srcRoot, destdir,
                 buildTypes = [('ReleaseDLL',), ('DebugDLL', 'debug'),
                               ('DebugRtDLL',)],
-                extensions = ['.dll', '.lib', '.exp']):
+                extensions = ['.dll', '.lib', '.exp','.pdb']):
    build_platform = 'Win32'
    if gBuild64:
       build_platform = 'x64'
@@ -1590,8 +1599,8 @@ def installGadgeteerDrivers(prefix, buildDir):
    drivers = ['DTrack', 'DataGlove', 'DirectXJoystick', 'Ether24', 'Fastrak',
               'Flock', 'IBox', 'IntersenseAPI', 'IS900', 'MotionNode',
               'MotionStar', 'MSFTSpeechRecognition', 'PinchGlove',
-              'SerialEncoder', 'SdlJoystick', 'SpaceBall', 'TrackdAPI', 'VRPN', 
-              'Wanda', 'X-IST', 'OptiTrack']
+              'SerialEncoder', 'SdlJoystick', 'SpaceBall', 'TUIO','TrackdAPI',
+			  'VRPN', 'Wanda', 'X-IST', 'OptiTrack']
 
    for d in drivers:
       srcdir = os.path.join(srcroot, d)
@@ -2503,11 +2512,14 @@ class GuiFrontEnd:
             sys.exit(EXIT_STATUS_MSVS_START_ERROR)
       self.buildFinished()
 
-def getVSCmd():
+def getVSCmd( interactive=True ):
    devenv_cmd = None
    # devenv is used by the full version of Visual Studio. VCExpress is the
    # launch command used by Visual C++ Express Edition.
-   cmds = ['devenv.exe', 'VCExpress.exe']
+   if( interactive ):
+      cmds = ['devenv.exe', 'VCExpress.exe']
+   else:
+      cmds = ['devenv.com', 'VCExpress.exe']
 
    for p in os.getenv('PATH', '').split(os.pathsep):
 #      print "Searching in", p
@@ -2594,17 +2606,21 @@ def doMSVCUpgrade(devenvCmd, vcDir, solutionFile):
    # Finally upgrade solution if needed
    subprocess.call([devenvCmd, solutionFile, "/upgrade"])
 
-def getBuildCommand(msbuildCmd, solutionFile, config):
-   #if gBuild64:
-   #   arch = 'x64'
-   #else:
-   #   arch = 'Win32'
-   cmd = [msbuildCmd, solutionFile, "/p:Configuration=%s" % config]
-   if gJobLimit == None:
-      cmd.append("/m")
+def getBuildCommand(devenvCmd, solutionFile, config):
+   if gBuild64:
+      arch = 'x64'
    else:
-      cmd.append("/maxcpucount:%s" % gJobLimit)
-   cmd.append("/p:BuildInParallel=true")
+      arch = 'Win32'
+   cmd = [devenvCmd, solutionFile, "/build", "%s|%s" % (config, arch)]
+
+   # with devenv, there doesn't seem to be a way to control parallel
+   # builds via the command line
+   #
+   #if gJobLimit == None:
+   #   cmd.append("/m")
+   #else:
+   #   cmd.append("/maxcpucount:%s" % gJobLimit)
+   #cmd.append("/p:BuildInParallel=true")
    return cmd
 
 def getIDECommand(devenvCmd, solutionFile):
@@ -2685,7 +2701,8 @@ def main():
          status = 0
 
          if not skip_vs:
-            devenv_cmd    = getVSCmd()
+            devenv_cmd_interactive = getVSCmd()
+            devenv_cmd = getVSCmd( False )
             msbuild_cmd   = getMSBuild()
             solution_file = r'%s' % os.path.join(gJugglerDir, vc_dir,
                                                  'Juggler.sln')      
@@ -2694,11 +2711,11 @@ def main():
             
             if len(configs) > 0:
                for config in configs:
-                  cmd = getBuildCommand(msbuild_cmd, solution_file, config)
+                  cmd = getBuildCommand(devenv_cmd, solution_file, config)
                   print "Launching %s" % " ".join(cmd)
                   subprocess.call(cmd)
             else:
-               cmd = getIDECommand(devenv_cmd, solution_file)
+               cmd = getIDECommand(devenv_cmd_interactive, solution_file)
                print "Launching %s" % " ".join(cmd)
                subprocess.call(cmd)
 

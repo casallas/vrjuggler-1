@@ -98,17 +98,17 @@
 extern "C"
 {
 
-SNX_PLUGIN_EXPORT(const char*) getVersion()
+SNX_PLUGIN_EXPORT const char* getVersion()
 {
    return "sonix xx.xx.xx";
 }
 
-SNX_PLUGIN_EXPORT(const char*) getName()
+SNX_PLUGIN_EXPORT const char* getName()
 {
    return "OpenAL";
 }
 
-SNX_PLUGIN_EXPORT(snx::ISoundImplementation*) newPlugin()
+SNX_PLUGIN_EXPORT snx::ISoundImplementation* newPlugin()
 {
    return new snx::OpenALSoundImplementation;
 }
@@ -216,22 +216,25 @@ void OpenALSoundImplementation::trigger(const std::string& alias,
    }
 }
 
-bool OpenALSoundImplementation::isPlaying( const std::string& alias )
+bool OpenALSoundImplementation::isPlaying(const std::string& alias) const
 {
    vprASSERT(mContextId != NULL && mDev != NULL &&
              "startAPI must be called prior to this function");
 
    if (mBindLookup.count( alias ) > 0)
    {
-      vprASSERT(alIsSource(mBindLookup[alias].source) != AL_FALSE &&
+      lookup_map_t::const_iterator i = mBindLookup.find(alias);
+
+      vprASSERT(i != mBindLookup.end());
+      vprASSERT((*i).second.source != AL_FALSE &&
                 "weird, shouldn't happen...\n");
 
       ALint state( AL_INITIAL ); // initialized
 
 #if defined(VPR_OS_Windows) || defined(VPR_OS_Darwin)
-      alGetSourcei(mBindLookup[alias].source, AL_SOURCE_STATE, &state);
+      alGetSourcei((*i).second.source, AL_SOURCE_STATE, &state);
 #else
-      alGetSourceiv(mBindLookup[alias].source, AL_SOURCE_STATE, &state);
+      alGetSourceiv((*i).second.source, AL_SOURCE_STATE, &state);
 #endif
 
       switch(state)
@@ -249,20 +252,23 @@ bool OpenALSoundImplementation::isPlaying( const std::string& alias )
 }
 
 /** if the sound is paused, then return true. */
-bool OpenALSoundImplementation::isPaused( const std::string& alias )
+bool OpenALSoundImplementation::isPaused(const std::string& alias) const
 {
    vprASSERT(mContextId != NULL && mDev != NULL &&
              "startAPI must be called prior to this function");
 
    if (mBindLookup.count( alias ) > 0)
    {
-      vprASSERT(alIsSource(mBindLookup[alias].source) != AL_FALSE &&
+      lookup_map_t::const_iterator i = mBindLookup.find(alias);
+
+      vprASSERT(i != mBindLookup.end());
+      vprASSERT(alIsSource((*i).second.source) != AL_FALSE &&
                 "weird, shouldn't happen...\n");
       ALint state( AL_INITIAL ); // initialized
 #if defined(VPR_OS_Windows) || defined(VPR_OS_Darwin)
-      alGetSourcei(mBindLookup[alias].source, AL_SOURCE_STATE, &state);
+      alGetSourcei((*i).second.source, AL_SOURCE_STATE, &state);
 #else
-      alGetSourceiv(mBindLookup[alias].source, AL_SOURCE_STATE, &state);
+      alGetSourceiv((*i).second.source, AL_SOURCE_STATE, &state);
 #endif
       //std::cout << "state: " << state << (AL_PAUSED == state)
       //          << (AL_PLAYING == state) << (AL_STOPPED == state)
@@ -402,7 +408,7 @@ void OpenALSoundImplementation::setPosition(const std::string& alias, float x,
  * @output x,y,z are returned in OpenGL coordinates.
  */
 void OpenALSoundImplementation::getPosition(const std::string& alias,
-                                            float& x, float& y, float& z)
+                                            float& x, float& y, float& z) const
 {
    snx::SoundImplementation::getPosition( alias, x, y, z );
 }
@@ -444,7 +450,8 @@ void OpenALSoundImplementation::setListenerPosition(const gmtl::Matrix44f& mat)
 /**
  * get the position of the listener
  */
-void OpenALSoundImplementation::getListenerPosition( gmtl::Matrix44f& mat )
+void
+OpenALSoundImplementation::getListenerPosition(gmtl::Matrix44f& mat) const
 {
    snx::SoundImplementation::getListenerPosition( mat );
 }

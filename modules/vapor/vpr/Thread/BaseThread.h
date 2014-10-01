@@ -40,7 +40,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2/signal.hpp>
 
 #include <vpr/vprTypes.h>
 #include <vpr/Thread/TSTable.h>            /* Needed to cache a copy here */
@@ -66,7 +66,7 @@ typedef boost::function<void()> thread_func_t;
  *       to hold references to threads. The lack of virtual methods should
  *       make this fact self-evident. Just use the real thread type.
  */
-class VPR_CLASS_API BaseThread : private boost::noncopyable
+class VPR_API BaseThread : private boost::noncopyable
 {
 public:
    /** @name Thread State Callback Handling */
@@ -76,7 +76,7 @@ public:
     *
     * @since 1.1.44
     */
-   typedef boost::signal<void (vpr::Thread*)> state_signal_t;
+   typedef boost::signals2::signal<void (vpr::Thread*)> state_signal_t;
 
    /**
     * Connects the given slot to the signal emitted whenever a new thread
@@ -92,7 +92,7 @@ public:
     *
     * @since 1.1.44
     */
-   static boost::signals::connection
+   static boost::signals2::connection
       addThreadStartCallback(state_signal_t::slot_function_type slot);
 
    /**
@@ -109,7 +109,7 @@ public:
     *
     * @since 1.1.44
     */
-   static boost::signals::connection
+   static boost::signals2::connection
       addThreadExitCallback(state_signal_t::slot_function_type slot);
    //@}
 
@@ -275,7 +275,7 @@ private:
 };
 
 /// Ouput operator.
-VPR_API(std::ostream&) operator<<(std::ostream& out, Thread* threadPtr);
+VPR_API std::ostream& operator<<(std::ostream& out, Thread* threadPtr);
 
 // This is the actual function that is called.
 // It must be extern "C".

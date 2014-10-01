@@ -40,9 +40,9 @@ namespace vrj
  *
  * A frustum object.  This is a frustum.
  *
- * @date 10-1-97
+ * @date October 1, 1997
  */
-class VJ_CLASS_API Frustum
+class VJ_API Frustum
 {
 public:
    enum entry
@@ -94,7 +94,7 @@ private:
    std::vector<float> mFrust;   /**< Left, Right, Bottom, Top, Near, Far */
 };
 
-std::ostream& operator<<(std::ostream& out, Frustum& _frust);
+std::ostream& operator<<(std::ostream& out, const Frustum& frust);
 
 }
 

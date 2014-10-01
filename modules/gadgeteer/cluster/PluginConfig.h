@@ -36,13 +36,6 @@
  
 #include <gadget/gadgetConfig.h>
 
-/*
- * ----------------------------------------------------------------------------
- * DLL-related macros.  These are based on the macros used by NSPR.  Use
- * GADGET_CLUSTER_PLUGIN_EXTERN for the prototype and GADGET_CLUSTER_PLUGIN_IMPLEMENT for the
- * implementation.
- * ----------------------------------------------------------------------------
- */
 #if defined(WIN32) || defined(WIN64)
 
 #   if defined(__GNUC__)
@@ -50,68 +43,29 @@
 #       define _declspec(x) __declspec(x)
 #   endif
 
-#   define GADGET_CLUSTER_PLUGIN_EXPORT(__type)      _declspec(dllexport) __type
-#   define GADGET_CLUSTER_PLUGIN_EXPORT_CLASS        _declspec(dllexport)
-#   define GADGET_CLUSTER_PLUGIN_EXPORT_DATA(__type) _declspec(dllexport) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT(__type)      _declspec(dllimport) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT_DATA(__type) _declspec(dllimport) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT_CLASS        _declspec(dllimport)
-
-#   define GADGET_CLUSTER_PLUGIN_EXTERN(__type)         extern _declspec(dllexport) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPLEMENT(__type)      _declspec(dllexport) __type
-#   define GADGET_CLUSTER_PLUGIN_EXTERN_DATA(__type)    extern _declspec(dllexport) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPLEMENT_DATA(__type) _declspec(dllexport) __type
-
-#   define GADGET_CLUSTER_PLUGIN_CALLBACK
-#   define GADGET_CLUSTER_PLUGIN_CALLBACK_DECL
-#   define GADGET_CLUSTER_PLUGIN_STATIC_CALLBACK(__x) static __x
+#   define GADGET_CLUSTER_PLUGIN_EXPORT        _declspec(dllexport)
+#   define GADGET_CLUSTER_PLUGIN_IMPORT        _declspec(dllimport)
+#   define GADGET_CLUSTER_PLUGIN_EXTERN_EXPORT extern _declspec(dllexport)
+#   define GADGET_CLUSTER_PLUGIN_EXTERN_IMPORT extern _declspec(dllimport)
 
 #elif defined(GADGET_HAVE_GCC_VISIBILITY)
-
-#   define GADGET_CLUSTER_PLUGIN_EXPORT(__type)      __attribute__ ((visibility("default"))) __type
-#   define GADGET_CLUSTER_PLUGIN_EXPORT_CLASS        __attribute__ ((visibility("default")))
-#   define GADGET_CLUSTER_PLUGIN_EXPORT_DATA(__type) __attribute__ ((visibility("default"))) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT(__type)      __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT_DATA(__type) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT_CLASS        
-
-#   define GADGET_CLUSTER_PLUGIN_EXTERN(__type)         extern __attribute__ ((visibility("default"))) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPLEMENT(__type)      __attribute__ ((visibility("default"))) __type
-#   define GADGET_CLUSTER_PLUGIN_EXTERN_DATA(__type)    extern __attribute__ ((visibility("default"))) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPLEMENT_DATA(__type) __attribute__ ((visibility("default"))) __type
-
-#   define GADGET_CLUSTER_PLUGIN_CALLBACK
-#   define GADGET_CLUSTER_PLUGIN_CALLBACK_DECL
-#   define GADGET_CLUSTER_PLUGIN_STATIC_CALLBACK(__x) static __x
-
-#else   /* UNIX (where this stuff is simple!) */
-
-#   define GADGET_CLUSTER_PLUGIN_EXPORT(__type)      __type
-#   define GADGET_CLUSTER_PLUGIN_EXPORT_CLASS
-#   define GADGET_CLUSTER_PLUGIN_EXPORT_DATA(__type) __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT(__type)      __type
-#   define GADGET_CLUSTER_PLUGIN_IMPORT_CLASS
-#   define GADGET_CLUSTER_PLUGIN_IMPORT_DATA(__type) __type
-
-#   define GADGET_CLUSTER_PLUGIN_EXTERN(__type)         extern __type
-#   define GADGET_CLUSTER_PLUGIN_IMPLEMENT(__type)      __type
-#   define GADGET_CLUSTER_PLUGIN_EXTERN_DATA(__type)    extern __type
-#   define GADGET_CLUSTER_PLUGIN_IMPLEMENT_DATA(__type) __type
-
-#   define GADGET_CLUSTER_PLUGIN_CALLBACK
-#   define GADGET_CLUSTER_PLUGIN_CALLBACK_DECL
-#   define GADGET_CLUSTER_PLUGIN_STATIC_CALLBACK(__x) static __x
-
-#endif	/* WIN32 || WIN64 */
+#   define GADGET_CLUSTER_PLUGIN_EXPORT        __attribute__ ((visibility("default")))
+#   define GADGET_CLUSTER_PLUGIN_IMPORT
+#   define GADGET_CLUSTER_PLUGIN_EXTERN_EXPORT extern __attribute__ ((visibility("default")))
+#   define GADGET_CLUSTER_PLUGIN_EXTERN_IMPORT extern
+#else
+#   define GADGET_CLUSTER_PLUGIN_EXPORT
+#   define GADGET_CLUSTER_PLUGIN_IMPORT
+#   define GADGET_CLUSTER_PLUGIN_EXTERN_EXPORT extern
+#   define GADGET_CLUSTER_PLUGIN_EXTERN_IMPORT extern
+#endif  /* WIN32 || WIN64 */
 
 #ifdef _GADGET_CLUSTER_PLUGIN_BUILD_
-#   define GADGET_CLUSTER_PLUGIN_API(__type)	GADGET_CLUSTER_PLUGIN_EXPORT(__type)
-#   define GADGET_CLUSTER_PLUGIN_CLASS_API	GADGET_CLUSTER_PLUGIN_EXPORT_CLASS
-#   define GADGET_CLUSTER_PLUGIN_DATA_API(__type)	GADGET_CLUSTER_PLUGIN_EXPORT_DATA(__type)
+#   define GADGET_CLUSTER_PLUGIN_API    GADGET_CLUSTER_PLUGIN_EXPORT
+#   define GADGET_CLUSTER_PLUGIN_EXTERN GADGET_CLUSTER_PLUGIN_EXTERN_EXPORT
 #else
-#   define GADGET_CLUSTER_PLUGIN_API(__type)	GADGET_CLUSTER_PLUGIN_IMPORT(__type)
-#   define GADGET_CLUSTER_PLUGIN_CLASS_API	GADGET_CLUSTER_PLUGIN_IMPORT_CLASS
-#   define GADGET_CLUSTER_PLUGIN_DATA_API(__type)	GADGET_CLUSTER_PLUGIN_IMPORT_DATA(__type)
+#   define GADGET_CLUSTER_PLUGIN_API    GADGET_CLUSTER_PLUGIN_IMPORT
+#   define GADGET_CLUSTER_PLUGIN_EXTERN GADGET_CLUSTER_PLUGIN_EXTERN_IMPORT
 #endif
 
 #endif /* _GADGET_CLUSTER_PLUGIN_CONFIG_H_ */

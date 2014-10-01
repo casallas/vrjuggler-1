@@ -71,7 +71,7 @@ namespace snx
     *
     * @ingroup SonixAPI
     */
-   class SNX_CLASS_API SoundHandle
+   class SNX_API SoundHandle
    {
    public:
       /**
@@ -114,7 +114,10 @@ namespace snx
       }
 
       /** Gets the name of this handle. */
-      std::string getName() const { return mAlias; }
+      const std::string& getName() const
+      {
+         return mAlias;
+      }
 
       /** Virtual destructor. */
       virtual ~SoundHandle();
@@ -139,7 +142,7 @@ namespace snx
       /**
        * Is the sound currently playing?
        */
-      virtual bool isPlaying()
+      virtual bool isPlaying() const
       {
          return sonix::instance()->isPlaying( mAlias );
       }
@@ -159,7 +162,7 @@ namespace snx
       /**
        * Is the sound retriggerable?
        */
-      virtual bool isRetriggerable()
+      virtual bool isRetriggerable() const
       {
          return sonix::instance()->isRetriggerable( mAlias );
       }
@@ -191,7 +194,7 @@ namespace snx
       }
 
       /** If the sound is paused, then return true. */
-      virtual bool isPaused()
+      virtual bool isPaused() const
       {
          return sonix::instance()->isPaused( mAlias );
       }
@@ -212,7 +215,7 @@ namespace snx
       }
 
       /** Is the sound ambient? */
-      virtual bool isAmbient()
+      virtual bool isAmbient() const
       {
          return sonix::instance()->isAmbient( mAlias );
       }
@@ -273,7 +276,7 @@ namespace snx
        * @param z Storage for the Z coordinate of the sound in 3D OpenGL
        *          coordinates.
        */
-      virtual void getPosition( float& x, float& y, float& z )
+      virtual void getPosition(float& x, float& y, float& z) const
       {
          sonix::instance()->getPosition( mAlias, x, y, z );
       }
@@ -294,7 +297,7 @@ namespace snx
        *
        * @param mat Storage for returning the position of the listener.
        */
-      virtual void getListenerPosition( gmtl::Matrix44f& mat )
+      virtual void getListenerPosition(gmtl::Matrix44f& mat) const
       {
          sonix::instance()->getListenerPosition( mat );
       }

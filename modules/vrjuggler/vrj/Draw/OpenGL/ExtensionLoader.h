@@ -27,6 +27,9 @@
 #ifndef _VRJ_OPENGL_EXTENSION_LOADER_H_
 #define _VRJ_OPENGL_EXTENSION_LOADER_H_
 
+#if defined(WIN32) && defined(WINGDIAPI)
+#  define GLAPI WINGDIAPI
+#endif
 
 namespace vrj
 {

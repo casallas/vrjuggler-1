@@ -57,7 +57,7 @@ namespace vpr
  *
  * @todo Add smart buffering for type sizes.
  */
-class VPR_CLASS_API XMLObjectReader : public ObjectReader
+class VPR_API XMLObjectReader : public ObjectReader
 {
 public:
    XMLObjectReader(const std::vector<vpr::Uint8>& data);
@@ -116,6 +116,34 @@ public:
     *                     the underlying data source.
     */
    virtual vpr::Uint64 readUint64();
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual vpr::Int8 readInt8();
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual vpr::Int16 readInt16();
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual vpr::Int32 readInt32();
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual vpr::Int64 readInt64();
 
    /**
     * @throw EOFException If end of file is reached while reading.
@@ -186,6 +214,46 @@ public:
    virtual void readUint64(vpr::Uint64& val)
    {
       val = this->readUint64();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual void readInt8(vpr::Int8& val)
+   {
+      val = this->readInt8();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual void readInt16(vpr::Int16& val)
+   {
+      val = this->readInt16();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual void readInt32(vpr::Int32& val)
+   {
+      val = this->readInt32();
+   }
+
+   /**
+    * @throw EOFException If end of file is reached while reading.
+    * @throw IOException  If some other I/O error occurs while reading from
+    *                     the underlying data source.
+    */
+   virtual void readInt64(vpr::Int64& val)
+   {
+      val = this->readInt64();
    }
 
    /**

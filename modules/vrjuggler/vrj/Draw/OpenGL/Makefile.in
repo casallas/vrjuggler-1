@@ -40,13 +40,21 @@ srcdir=		@srcdir@
 top_srcdir=	@top_srcdir@
 INSTALL=	@INSTALL@
 SUBOBJDIR=	$(GL_LIBRARY)
+DIRPRFX=	vrj/Draw/OpenGL/
+SUBDIR=
 
 SRCS=		App.cpp				\
 		BasicSimulator.cpp		\
+		DrawAxesFunctorsCore.cpp	\
+		DrawAxesFunctors.cpp		\
+		DrawHeadFunctorsCore.cpp	\
 		DrawHeadFunctors.cpp		\
 		DrawManager.cpp			\
+		DrawWandFunctorsCore.cpp	\
 		DrawWandFunctors.cpp		\
 		ExtensionLoader.cpp		\
+		ExtensionLoaderGL.cpp		\
+		ExtensionLoaderGLCore.cpp		\
 		Pipe.cpp			\
 		ProcApp.cpp			\
 		SimInterface.cpp		\
@@ -69,10 +77,11 @@ else
    else
       SRCS+=	ExtensionLoaderGLX.cpp	\
 		WindowXWin.cpp
+      SUBDIR=	GL
    endif
 endif
 
-include $(MKPATH)/dpp.obj.mk
+include $(MKPATH)/dpp.obj-subdir.mk
 
 # -----------------------------------------------------------------------------
 # Include dependencies generated automatically.

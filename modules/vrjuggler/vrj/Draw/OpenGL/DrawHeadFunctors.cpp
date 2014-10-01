@@ -26,10 +26,19 @@
 
 #include <vrj/Draw/OpenGL/Config.h>
 
+#include <gmtl/Math.h>
 #include <gmtl/Vec.h>
 
 #include <vrj/Kernel/User.h>
 #include <vrj/Draw/OpenGL/DrawHeadFunctors.h>
+
+#if defined(VPR_OS_Darwin) && defined(VRJ_USE_COCOA)
+#  include <OpenGL/glu.h>
+#else
+#  include <GL/glu.h>
+#endif
+
+#define NUM_TRIANGLES_ON_SPHERE(nsteps)   (3*(2*(nsteps))+6*((nsteps)-1)*(nsteps))
 
 
 namespace vrj
@@ -47,7 +56,7 @@ DrawEllipsoidHeadFunctor::~DrawEllipsoidHeadFunctor()
 {
    if ( NULL != mQuadObj )
    {
-      gluDeleteQuadric(mQuadObj);
+      gluDeleteQuadric((GLUquadricObj *) mQuadObj);
    }
 }
 
@@ -55,7 +64,7 @@ void DrawEllipsoidHeadFunctor::contextInit()
 {
    if ( NULL == mQuadObj )
    {
-      mQuadObj = gluNewQuadric();
+      mQuadObj = (void *) gluNewQuadric();
    }
 }
 
@@ -102,35 +111,14 @@ void DrawEllipsoidHeadFunctor::draw(vrj::UserPtr user)
          drawSphere(eye_radius, 5, 5);
       glPopMatrix();
    glPopMatrix();
-
-   // --- Draw the axis --- //
-   gmtl::Vec3f x_axis(0.15f, 0.0f, 0.0f);
-   gmtl::Vec3f y_axis(0.0f, 0.15f, 0.0f);
-   gmtl::Vec3f z_axis(0.0f, 0.0f, 0.15f);
-   gmtl::Vec3f origin(0.0f, 0.0f, 0.0f);
-
-   glPushAttrib(GL_LIGHTING_BIT);
-   glDisable(GL_LIGHTING);
-   glBegin(GL_LINES);
-       glColor3f(1.0f, 0.0f, 0.0f);
-       glVertex3fv(origin.mData);
-       glVertex3fv(x_axis.mData);
-       glColor3f(0.0f, 1.0f, 0.0f);
-       glVertex3fv(origin.mData);
-       glVertex3fv(y_axis.mData);
-       glColor3f(0.0f, 0.0f, 1.0f);
-       glVertex3fv(origin.mData);
-       glVertex3fv(z_axis.mData);
-   glEnd();
-   glPopAttrib();
 }
 
 void DrawEllipsoidHeadFunctor::drawSphere(const float radius,
                                           const int slices, const int stacks)
 {
-  gluQuadricDrawStyle(mQuadObj, (GLenum) GLU_FILL);
-  gluQuadricNormals(mQuadObj, (GLenum) GLU_SMOOTH);
-  gluSphere(mQuadObj, radius, slices, stacks);
+  gluQuadricDrawStyle((GLUquadricObj *) mQuadObj, (GLenum) GLU_FILL);
+  gluQuadricNormals((GLUquadricObj *) mQuadObj, (GLenum) GLU_SMOOTH);
+  gluSphere((GLUquadricObj *) mQuadObj, radius, slices, stacks);
 }
 
 }

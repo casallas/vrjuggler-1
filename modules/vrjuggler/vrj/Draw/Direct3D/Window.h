@@ -79,7 +79,7 @@ namespace direct3d
  *
  * @note This class was renamed from vrj::D3dWindow in VR Juggler 2.3.11.
  */
-class VJ_D3D_CLASS_API Window
+class VJ_D3D_API Window
    : public gadget::InputAreaWin32
 {
 public:
@@ -290,7 +290,7 @@ public:
    }
 
    friend std::ostream& operator<<(std::ostream& out,
-                                   vrj::direct3d::Window& win);
+                                   const vrj::direct3d::Window& win);
 
 private:
    // WindowProcedure to deal with the events generated.
@@ -374,7 +374,7 @@ private:
    static int getNextWindowId();
 };
 
-// ostream& operator<<(ostream& out, vrj::direct3d::Window& win);
+// ostream& operator<<(ostream& out, const vrj::direct3d::Window& win);
 
 } // end direct3d namespace
 

@@ -85,7 +85,7 @@ public:
    /**
     * Is the sound currently playing?
     */
-   virtual bool isPlaying( const std::string& alias ) = 0;
+   virtual bool isPlaying(const std::string& alias) const = 0;
 
    /**
     * When sound is already playing then you call trigger,
@@ -96,7 +96,7 @@ public:
    /**
     * Is the sound retriggerable?
     */
-   virtual bool isRetriggerable( const std::string& alias ) = 0;
+   virtual bool isRetriggerable(const std::string& alias) const = 0;
 
    /**
     * Stops the sound.
@@ -116,7 +116,7 @@ public:
    virtual void unpause( const std::string& alias ) = 0;
 
    /** If the sound is paused, then return true. */
-   virtual bool isPaused( const std::string& alias ) = 0;
+   virtual bool isPaused(const std::string& alias) const = 0;
 
    /**
     * Ambient or positional sound.
@@ -130,7 +130,7 @@ public:
     * Is the sound ambient: attached to the listener, doesn't change volume
     * when listener moves.
     */
-   virtual bool isAmbient( const std::string& alias ) = 0;
+   virtual bool isAmbient(const std::string& alias) const = 0;
 
    /** Bends the pitch of the sound. */
    virtual void setPitchBend( const std::string& alias, float amount ) = 0;
@@ -160,7 +160,8 @@ public:
     * @param z     Storage for the Z coordinate of the sound's position (in
     *              OpenGL coordinates).
     */
-   virtual void getPosition( const std::string& alias, float& x, float& y, float& z ) = 0;
+   virtual void getPosition(const std::string& alias, float& x, float& y,
+                            float& z) const = 0;
 
    /**
     * Sets the position of the listener.
@@ -170,7 +171,7 @@ public:
    /**
     * Gets the position of the listener.
     */
-   virtual void getListenerPosition( gmtl::Matrix44f& mat ) = 0;
+   virtual void getListenerPosition(gmtl::Matrix44f& mat) const = 0;
 
    /**
     * Starts the sound API, creating any contexts or other configurations at
@@ -266,11 +267,13 @@ public:
     */
    virtual void unbind( const std::string& alias ) = 0;
 
-   virtual snx::SoundInfo& lookup( const std::string& alias ) = 0;
+   virtual snx::SoundInfo& lookup(const std::string& alias) = 0;
+
+   virtual const snx::SoundInfo& lookup(const std::string& alias) const = 0;
 
    virtual void setName( const std::string& name ) = 0;
 
-   virtual std::string& name() = 0;
+   virtual const std::string& name() const = 0;
 
 #ifdef VPR_OS_Windows
    /**

@@ -32,12 +32,6 @@
 #include <vrj/Draw/OpenGL/SimInterface.h>
 #include <vrj/Draw/OpenGL/DrawObjectFunctor.h>
 
-#ifdef VPR_OS_Darwin
-#   include <OpenGL/gl.h>
-#else
-#   include <GL/gl.h>
-#endif
-
 #include <gadget/Type/PositionInterface.h>
 
 #include <gmtl/Matrix.h>
@@ -173,10 +167,16 @@ protected: // Drawing functions used by library
       mDrawHeadFunctor = functor;
    }
 
+   /** Sets the functor used to render the axes. */
+   void setDrawAxesFunctor(vrj::opengl::DrawAxesFunctor* functor)
+   {
+      mDrawAxesFunctor = functor;
+   }
+
 protected:     // --- Geom helpers --- //
    void initQuadObj();
    void drawLine(const gmtl::Vec3f& start, const gmtl::Vec3f& end);
-   void drawBox(const float size, const GLenum type);
+   void drawBox(const float size, const unsigned int type);
    void drawWireCube(const float size);
    void drawSolidCube(const float size);
    //void drawGlove(gadget::GloveProxy* gloveProxy);
@@ -186,6 +186,9 @@ protected:     // --- Geom helpers --- //
 
    /** The functor to draw the head. */
    vrj::opengl::DrawObjectFunctor* mDrawHeadFunctor;
+
+   /** The functor to draw the axes. */
+   vrj::opengl::DrawAxesFunctor* mDrawAxesFunctor;
 
    SimViewportPtr mSimViewport;
 

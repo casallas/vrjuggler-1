@@ -61,17 +61,17 @@
 extern "C"
 {
 
-SNX_PLUGIN_EXPORT(const char*) getVersion()
+SNX_PLUGIN_EXPORT const char* getVersion()
 {
    return "sonix xx.xx.xx";
 }
 
-SNX_PLUGIN_EXPORT(const char*) getName()
+SNX_PLUGIN_EXPORT const char* getName()
 {
    return "Subsynth";
 }
 
-SNX_PLUGIN_EXPORT(snx::ISoundImplementation*) newPlugin()
+SNX_PLUGIN_EXPORT snx::ISoundImplementation* newPlugin()
 {
    return new snx::SubsynthSoundImplementation;
 }
@@ -152,7 +152,7 @@ void SubsynthSoundImplementation::trigger(const std::string& alias,
    }
 }
 
-bool SubsynthSoundImplementation::isPlaying( const std::string& alias )
+bool SubsynthSoundImplementation::isPlaying(const std::string& alias) const
 {
    if (this->isStarted() == false) return false;
    
@@ -168,7 +168,7 @@ bool SubsynthSoundImplementation::isPlaying( const std::string& alias )
 }
 
 /** if the sound is paused, then return true. */
-bool SubsynthSoundImplementation::isPaused( const std::string& alias )
+bool SubsynthSoundImplementation::isPaused(const std::string& alias) const
 {
    if (this->isStarted() == false) return false;
    
@@ -285,7 +285,9 @@ void SubsynthSoundImplementation::setPosition( const std::string& alias, float x
  * @input alias is a name that has been associate()d with some sound data
  * @output x,y,z are returned in OpenGL coordinates.
  */
-void SubsynthSoundImplementation::getPosition( const std::string& alias, float& x, float& y, float& z )
+void
+SubsynthSoundImplementation::getPosition(const std::string& alias,
+                                         float& x, float& y, float& z) const
 {
    snx::SoundImplementation::getPosition( alias, x, y, z );
 }
@@ -305,7 +307,8 @@ void SubsynthSoundImplementation::setListenerPosition( const gmtl::Matrix44f& ma
 /**
  * get the position of the listener
  */
-void SubsynthSoundImplementation::getListenerPosition( gmtl::Matrix44f& mat )
+void
+SubsynthSoundImplementation::getListenerPosition(gmtl::Matrix44f& mat) const
 {
    snx::SoundImplementation::getListenerPosition( mat );
 }

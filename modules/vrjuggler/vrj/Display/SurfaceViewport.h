@@ -46,7 +46,8 @@ namespace vrj
  *
  * Defines a display surface an associated projections.
  */
-class VJ_CLASS_API SurfaceViewport : public Viewport
+class VJ_API SurfaceViewport
+   : public Viewport
 {
 protected:
    SurfaceViewport();
@@ -102,7 +103,7 @@ public:
    void updateCorners();
 
    virtual std::ostream& outStream(std::ostream& out,
-                                   const unsigned int indentLevel = 0);
+                                   const unsigned int indentLevel = 0) const;
 
 protected:
    /** @name The corners in 3Space (for config) */

@@ -44,7 +44,8 @@ namespace vrj
  *
  * Projection class that simply takes a matrix for the camera position.
  */
-class VJ_CLASS_API CameraProjection : public Projection
+class VJ_API CameraProjection
+   : public Projection
 {
 protected:
    CameraProjection();
@@ -73,7 +74,7 @@ public:
                                const float scaleFactor);
 
    virtual std::ostream& outStream(std::ostream& out,
-                                   const unsigned int indentLevel = 0);
+                                   const unsigned int indentLevel = 0) const;
 
 public:
    //float mAspectRatio;     // w/h

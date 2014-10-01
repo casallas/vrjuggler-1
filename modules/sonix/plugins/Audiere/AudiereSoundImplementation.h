@@ -93,7 +93,7 @@ public:
    /**
      * is the sound currently playing?
      */
-   bool isPlaying( const std::string& alias );
+   bool isPlaying(const std::string& alias) const;
 
    /**
     * @semantics stop the sound
@@ -113,7 +113,7 @@ public:
    virtual void unpause( const std::string& alias );
 
    /** if the sound is paused, then return true. */
-   virtual bool isPaused( const std::string& alias );
+   virtual bool isPaused(const std::string& alias) const;
 
    /*
     * when sound is already playing then you call trigger,
@@ -155,7 +155,7 @@ public:
     * @output x,y,z are returned in OpenGL coordinates.
     */
    virtual void getPosition(const std::string& alias, float& x, float& y,
-                            float& z);
+                            float& z) const;
 
    /**
     * set the position of the listener
@@ -165,7 +165,7 @@ public:
    /**
     * get the position of the listener
     */
-   virtual void getListenerPosition( gmtl::Matrix44f& mat );
+   virtual void getListenerPosition(gmtl::Matrix44f& mat) const;
 
 public:
    /**
@@ -280,7 +280,8 @@ private:
    audiere::RefPtr<audiere::OutputStream> mCurrentTrack;
    bool mIsPlaying;
 
-   std::map<std::string, audiere::OutputStreamPtr> trackMap;
+   typedef std::map<std::string, audiere::OutputStreamPtr> track_map_t;
+   track_map_t trackMap;
    std::map<std::string, audiere::SoundEffectPtr> effectMap;
 };
 

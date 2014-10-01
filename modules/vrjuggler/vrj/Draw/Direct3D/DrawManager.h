@@ -72,7 +72,7 @@ class Window;
  *
  * @note This class was renamed from vrj::D3dDrawManager in VR Juggler 2.3.11.
  */
-class VJ_D3D_CLASS_API DrawManager
+class VJ_D3D_API DrawManager
    : public vrj::DrawManager
    , private boost::noncopyable
 {
@@ -116,7 +116,7 @@ public:
    virtual void closeAPI();
 
    /** Outputs some debug info. */
-   virtual void outStream(std::ostream& out);
+   virtual void outStream(std::ostream& out) const;
 
    /** Draws all the ogl pipes/windows. */
    void drawAllPipes();
